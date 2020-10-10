@@ -1,0 +1,18 @@
+MENU
+
+PLAY
+    single player/multiplayer
+    single player
+        level select
+        do you want to load (yes/no)
+    multiplayer
+        ????????????
+LOAD
+    list of saves
+    do you want to load (yes/no)
+    loads
+SETTINGS
+    settings tab
+QUIT
+    do you want to quit (yes/no)
+    quit
