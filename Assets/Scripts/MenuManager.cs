@@ -6,29 +6,36 @@ using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject mainMenuParent, amountSelectParent, settingsMenu;
+    public GameObject mainMenuParent, amountSelectParent, settingsMenuParent, levelSelectParent,
+           loadLevelParent;
 
 #region Main Menu
 
     private void Start() {
         Debug.Log("Menu Init");
         mainMenuParent.SetActive(true);
-        settingsMenu.SetActive(false);
-        amountSelectParent.SetActive(false);    
+        settingsMenuParent.SetActive(false);
+        amountSelectParent.SetActive(false);  
+        levelSelectParent.SetActive(false);  
+        loadLevelParent.SetActive(false);
     }
 
     public void OnPlayButton(){
         Debug.Log("Play pressed");
         mainMenuParent.SetActive(false);
-        settingsMenu.SetActive(false);
         amountSelectParent.SetActive(true);
+    }
+
+    public void OnLoadLevel(){
+        Debug.Log("Load Level Pressed");
+        mainMenuParent.SetActive(false);
+        loadLevelParent.SetActive(true);
     }
 
     public void OnSettings(){
         Debug.Log("Settings Pressed");
         mainMenuParent.SetActive(false);
-        settingsMenu.SetActive(true);
-        amountSelectParent.SetActive(false);
+        settingsMenuParent.SetActive(true);
     }
 
     public void OnQuit(){
@@ -36,17 +43,18 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    #endregion
+#endregion
 
 #region Player Amount Select
 
     public void OnSinglePlayer(){
         Debug.Log("Loading SinglePlayer Scene");
-        SceneManager.LoadScene(1);
+        mainMenuParent.SetActive(false);
+        levelSelectParent.SetActive(true);
     }
 
     public void OnMultiPlayer(){
-        Debug.Log("Loading MultiPlayer Scene");
+        Debug.Log("Loading Multiplayer Scene");
         SceneManager.LoadScene(1);
     }
 
@@ -54,7 +62,17 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Going Back To Main Menu");
         mainMenuParent.SetActive(true);
         amountSelectParent.SetActive(false);   
-        settingsMenu.SetActive(false); 
+        settingsMenuParent.SetActive(false); 
+        levelSelectParent.SetActive(false);
+        loadLevelParent.SetActive(false);
+    }
+
+#endregion
+
+#region Level Select
+
+    public void LoadLevel(int number){
+        SceneManager.LoadScene("Level " + number.ToString());
     }
 
 #endregion

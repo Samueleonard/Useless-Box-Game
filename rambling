@@ -1,0 +1,14 @@
+only have 1 level
+when load level pressed, load only scene (save time + storage)
+but parameters for robot would change between levels
+so would have to be pulled from text file (or json?)
+
+levelX.json 
+read when scene loaded, pass level parameter on scene load? (load level with argument)
+each level has different parameters, making levels harder
+. robot speed
+. levelup chance
+. time limits
+. switch amounts? hide/show switches depending on switch amounts
+        each switch has a list of levels that it will appear on
+        at start of level, check if level is included in the list, if it is, show switch, else hide
