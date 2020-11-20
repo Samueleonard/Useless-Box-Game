@@ -6,12 +6,13 @@ public class CameraMove : MonoBehaviour
 {
     // The position that that camera will be following.
     public Transform[] targetsHorizontal; 
-    public Transform[] targetsVertical;
+    public GameObject targetVertical;
 
     public int currentTargetHIndex = 0; //which target we are currently on horizontally
-    public int currentTargetVIndex = 0; //which target we are currently on vertically
     // The speed with which the camera will be following.           
     public float smoothing = 2f;        
+
+    public bool vertical; //are we currently in vertical view
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,7 @@ public class CameraMove : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
-            if(currentTargetHIndex > targetsHorizontal.Length)
+            if(currentTargetHIndex == targetsHorizontal.Length-1)
             {
                 currentTargetHIndex = 0;
             }
@@ -41,8 +42,29 @@ public class CameraMove : MonoBehaviour
             }
         }
 
-        Vector3 targetCamPos = targetsHorizontal[currentTargetHIndex].position;
+        if(Input.GetKeyDown(KeyCode.UpArrow)){
+            vertical = !vertical; //are we currently in verticle and want to move down? or do we want to go to the top
+            if(vertical){
+                Vector3 targetCamPos = targetVertical.transform.position;
+                transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetVertical.transform.rotation, 200 * Time.deltaTime);
+            }                
+        }
+
+        if(Input.GetKeyDown(KeyCode.DownArrow)){
+            //if we are horizontal, do nothing
+            if(vertical){
+                vertical = false;
+                Vector3 targetCamPos = targetsHorizontal[0].position;
+                transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetsHorizontal[currentTargetHIndex].rotation, 200 * Time.deltaTime);
+            }                
+        }
+
+        if(!vertical){
+            Vector3 targetCamPos = targetsHorizontal[currentTargetHIndex].position;
             transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetsHorizontal[currentTargetHIndex].rotation, 200 * Time.deltaTime);
+        }
     }
 }

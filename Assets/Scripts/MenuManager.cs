@@ -50,6 +50,7 @@ public class MenuManager : MonoBehaviour
     public void OnSinglePlayer(){
         Debug.Log("Loading SinglePlayer Scene");
         mainMenuParent.SetActive(false);
+        amountSelectParent.SetActive(false);
         levelSelectParent.SetActive(true);
     }
 
