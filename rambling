@@ -12,3 +12,18 @@ each level has different parameters, making levels harder
 . switch amounts? hide/show switches depending on switch amounts
         each switch has a list of levels that it will appear on
         at start of level, check if level is included in the list, if it is, show switch, else hide
+
+
+--------------------------
+
+Finish post proc
+finish cam rotate
+4 cams on top, facing each way
+pressing up arrow will take player to top cam, facing same direction as tey were facing
+pressing any key will take player back to side view depending on view they are currently facing
+pressing back arrow whilst in top will take player back to side view they came from
+
+sideView bool? 
+if false, control top view, remember before location and know possible side views to go to
+if true, control side view and wait for up/down arrow
+if down arrow pressed in side view, take view to opposite side
