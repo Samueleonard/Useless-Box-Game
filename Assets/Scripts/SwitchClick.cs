@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchClick : MonoBehaviour
 {
+    public GameManager gManager;
 
     // Update is called once per frame
     void Update()
@@ -17,13 +18,28 @@ public class SwitchClick : MonoBehaviour
                     if(tag == "LeftSwitch" ||tag == "BackSwitch"){
                         //if switch off, rotate +60, else rotate -60
                         if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
-                            hit.transform.rotation.z = 60;
+                            gManager.GetComponent<GameManager>().currentFlicked--;
+                            //hit.gameObject.transform.rotation.z = 60; DOES NOT WORK?
                         }
+                        else{
+                            gManager.GetComponent<GameManager>().currentFlicked++;
+                            
+                            //hit.gameObject.transform.rotation.z = -60; ALSO DOES NOT WORK?
+                        }
+                        hit.transform.gameObject.GetComponent<Switch>().switchedOn = !hit.transform.gameObject.GetComponent<Switch>().switchedOn; //if on, turn off, vice versa
                     }
                     if(tag == "RightSwitch" || tag == "FrontSwitch"){
-                        hit.transform.Rotate(0,0,-60);
+                        //if switch off, rotate -60, else rotate +60
+                        if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
+                            //hit.gameObject.transform.rotation.z = -60; DOES NOT WORK?
+                            gManager.GetComponent<GameManager>().currentFlicked--;
+                        }
+                        else{
+                            gManager.GetComponent<GameManager>().currentFlicked++;
+                            //hit.gameObject.transform.rotation.z = +60; ALSO DOES NOT WORK?
+                        }
+                        hit.transform.gameObject.GetComponent<Switch>().switchedOn = !hit.transform.gameObject.GetComponent<Switch>().switchedOn; //if on, turn off, vice versa
                     }
-
                 }
             }
         }
