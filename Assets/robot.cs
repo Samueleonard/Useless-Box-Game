@@ -5,7 +5,7 @@ using UnityEngine;
 public class robot : MonoBehaviour
 {
     public GameObject switches;
-    private gameObject target;
+    private GameObject target;
     public GameManager gManager;
 
     void FindTarget(){
@@ -13,7 +13,7 @@ public class robot : MonoBehaviour
         {
             if(!(swt.GetComponent<Switch>().switchedOn)){
                 target = swt;
-                StartCoroutine(Flip());
+                //StartCoroutine(Flip());
             }
         }
     }
@@ -22,8 +22,9 @@ public class robot : MonoBehaviour
 
     }
 
-    IEnumerator Flip(){
-        yield WaitForSeconds(5);
+    void Flip(){
+        //yield return new WaitForSeconds(5);
+        //this.transform.position = target.position;
         target.GetComponent<Switch>().switchedOn = false;
         gManager.GetComponent<GameManager>.currentFlicked--;
         //rotate 
