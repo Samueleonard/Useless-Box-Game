@@ -19,24 +19,24 @@ public class SwitchClick : MonoBehaviour
                         //if switch off, rotate +60, else rotate -60
                         if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
                             gManager.GetComponent<GameManager>().currentFlicked--;
-                            //hit.gameObject.transform.rotation.z = 60; DOES NOT WORK?
+                            hit.transform.gameObject.transform.Rotate(0,0,60);
                         }
                         else{
                             gManager.GetComponent<GameManager>().currentFlicked++;
-                            
-                            //hit.gameObject.transform.rotation.z = -60; ALSO DOES NOT WORK?
+
+                            hit.transform.gameObject.transform.Rotate(0, 0, -60);
                         }
                         hit.transform.gameObject.GetComponent<Switch>().switchedOn = !hit.transform.gameObject.GetComponent<Switch>().switchedOn; //if on, turn off, vice versa
                     }
                     if(tag == "RightSwitch" || tag == "FrontSwitch"){
                         //if switch off, rotate -60, else rotate +60
                         if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
-                            //hit.gameObject.transform.rotation.z = -60; DOES NOT WORK?
+                            hit.transform.gameObject.transform.Rotate(0, 0, -60);
                             gManager.GetComponent<GameManager>().currentFlicked--;
                         }
                         else{
                             gManager.GetComponent<GameManager>().currentFlicked++;
-                            //hit.gameObject.transform.rotation.z = +60; ALSO DOES NOT WORK?
+                            hit.transform.gameObject.transform.Rotate(0, 0, 60);
                         }
                         hit.transform.gameObject.GetComponent<Switch>().switchedOn = !hit.transform.gameObject.GetComponent<Switch>().switchedOn; //if on, turn off, vice versa
                     }
