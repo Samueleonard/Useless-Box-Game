@@ -16,14 +16,10 @@ each level has different parameters, making levels harder
 
 --------------------------
 
-Finish post proc
-finish cam rotate
-4 cams on top, facing each way
-pressing up arrow will take player to top cam, facing same direction as tey were facing
-pressing any key will take player back to side view depending on view they are currently facing
-pressing back arrow whilst in top will take player back to side view they came from
+each level has a load button
+each level has a unlocked bool
 
-sideView bool? 
-if false, control top view, remember before location and know possible side views to go to
-if true, control side view and wait for up/down arrow
-if down arrow pressed in side view, take view to opposite side
+if unlocked, clicking will load level
+if locked, clicking will do nothing (onscreen box?)
+
+finishing level will unlock next

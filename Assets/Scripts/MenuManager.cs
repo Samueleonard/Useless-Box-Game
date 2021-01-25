@@ -76,6 +76,9 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Level " + number.ToString());
     }
 
+    public void ResetPrefs(){
+        PlayerPrefs.DeleteKey("LevelPassed");
+    }
 #endregion
 
 public AudioMixer mixer;

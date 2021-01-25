@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     public Transform quitPanel;
     public Transform levelWonPanel;
 
+    public Text levelText;
+
+    private void Start() {
+        levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -23,7 +28,10 @@ public class GameManager : MonoBehaviour
             quitPanel.gameObject.SetActive(false);
             helpPanel.gameObject.SetActive(false);
             levelWonPanel.gameObject.SetActive(true);
+            levelControl.instance.Win();
+            Camera.main.GetComponent<SwitchClick>().enabled = false;
             PauseGame();
+
         }
         if(Input.GetKeyDown(KeyCode.I) && !paused)
             toggleHelpMenu();
@@ -69,6 +77,10 @@ public class GameManager : MonoBehaviour
 
     public void QuitMenu(){
         SceneManager.LoadScene(0);
+    }
+
+    public void LoadScene(int index){
+        SceneManager.LoadScene(levelControl.instance.sceneIndex+1);
     }
 
 }
