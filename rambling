@@ -16,10 +16,41 @@ each level has different parameters, making levels harder
 
 --------------------------
 
-each level has a load button
-each level has a unlocked bool
 
-if unlocked, clicking will load level
-if locked, clicking will do nothing (onscreen box?)
+wed 20    save/load progress 
 
-finishing level will unlock next
+thur    economy
+
+fri    robot move
+
+mon 25   robot move
+
+wed    level design
+
+thur   ui refinement
+
+fri
+
+mon 1
+
+wed
+
+thur
+
+fri
+
+mon 8
+
+wed
+
+thur
+
+mon
+
+tue
+
+wed
+
+thur
+
+fri
