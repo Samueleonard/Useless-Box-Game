@@ -17,9 +17,7 @@ each level has different parameters, making levels harder
 --------------------------
 
 
-wed 20    save/load progress 
-
-thur    economy
+thur    save/load
 
 fri    robot move
 
@@ -27,19 +25,19 @@ mon 25   robot move
 
 wed    level design
 
-thur   ui refinement
+thur   ui refinement on existing ui
 
-fri
+fri    powerups
 
-mon 1
+mon 1   save/load
 
-wed
+wed    vfx
 
-thur
+thur   random powerup drops
 
-fri
+fri      post processing
 
-mon 8
+mon 8    
 
 wed
 

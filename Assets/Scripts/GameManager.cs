@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public Transform levelWonPanel;
 
     public Text levelText;
+    public Text coinText;
+
+    public int coins;
+    public int coinBonus = 1;
 
     private void Start() {
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
             levelWonPanel.gameObject.SetActive(true);
             levelControl.instance.Win();
             Camera.main.GetComponent<SwitchClick>().enabled = false;
+            Debug.Log("Level Won. 100 coin bonus.");
+            coins += (10*coinBonus);
             PauseGame();
 
         }
@@ -42,6 +48,9 @@ public class GameManager : MonoBehaviour
             PauseGame();
         else
             ResumeGame();
+        
+        coinText.text = "Coins : " + coins.ToString();
+        
     }
 
     public void PauseGame(){
