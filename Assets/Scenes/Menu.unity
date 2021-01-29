@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 49574714}
   - component: {fileID: 49574713}
   - component: {fileID: 49574715}
+  - component: {fileID: 49574716}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -642,7 +643,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &49574715
 MonoBehaviour:
@@ -660,6 +661,28 @@ MonoBehaviour:
   level02Button: {fileID: 836573871}
   level03Button: {fileID: 2116248285}
   levelPassed: 0
+--- !u!114 &49574716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49574712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef15b153edf19d48b535b59bfaf4872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentFlicked: 0
+  winFlicked: 0
+  helpPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  quitPanel: {fileID: 0}
+  levelWonPanel: {fileID: 0}
+  levelText: {fileID: 0}
+  coinText: {fileID: 0}
+  coins: 0
+  coinBonus: 1
 --- !u!1 &49714573
 GameObject:
   m_ObjectHideFlags: 0
@@ -6324,7 +6347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1122719688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9322,7 +9345,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597445135
 GameObject:

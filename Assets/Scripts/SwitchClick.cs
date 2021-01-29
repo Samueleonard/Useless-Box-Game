@@ -25,12 +25,12 @@ public class SwitchClick : MonoBehaviour
                         //if switch off, rotate +60, else rotate -60
                         if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
                             gManager.GetComponent<GameManager>().currentFlicked--;
-                            hit.transform.gameObject.transform.Rotate(0,0,60);
+                            hit.transform.gameObject.transform.Rotate(0,0,25);
                             hit.transform.gameObject.GetComponent<AudioSource>().Play();
                         }
                         else{
                             gManager.GetComponent<GameManager>().currentFlicked++;
-                            hit.transform.gameObject.transform.Rotate(0, 0, -60);
+                            hit.transform.gameObject.transform.Rotate(0, 0, -25);
                             gManager.coins += (1*coinBonus);
                             hit.transform.gameObject.GetComponent<AudioSource>().Play();
                         }
@@ -39,13 +39,13 @@ public class SwitchClick : MonoBehaviour
                     if(tag == "RightSwitch" || tag == "FrontSwitch"){
                         //if switch off, rotate -60, else rotate +60
                         if(hit.transform.gameObject.GetComponent<Switch>().switchedOn){
-                            hit.transform.gameObject.transform.Rotate(0, 0, -60);
+                            hit.transform.gameObject.transform.Rotate(0, 0, -25);
                             gManager.GetComponent<GameManager>().currentFlicked--;
                             hit.transform.gameObject.GetComponent<AudioSource>().Play();
                         }
                         else{
                             gManager.GetComponent<GameManager>().currentFlicked++;
-                            hit.transform.gameObject.transform.Rotate(0, 0, 60);
+                            hit.transform.gameObject.transform.Rotate(0, 0, 25);
                             gManager.coins += (1*coinBonus);
                             hit.transform.gameObject.GetComponent<AudioSource>().Play();
                         }

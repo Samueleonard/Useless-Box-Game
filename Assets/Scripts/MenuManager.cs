@@ -32,6 +32,15 @@ public class MenuManager : MonoBehaviour
         loadLevelParent.SetActive(true);
     }
 
+    public void SavePlayer(){
+        SaveSystem.SaveData(GetComponent<GameManager>(), GetComponent<UnlockManager>());
+    }
+
+    public void LoadPlayer(){
+        ProgressData data = SaveSystem.LoadData();
+        //PlayerPrefs.SetInt()
+    }
+
     public void OnSettings(){
         Debug.Log("Settings Pressed");
         mainMenuParent.SetActive(false);

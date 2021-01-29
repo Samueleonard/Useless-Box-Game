@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
             levelWonPanel.gameObject.SetActive(true);
             levelControl.instance.Win();
             Camera.main.GetComponent<SwitchClick>().enabled = false;
-            Debug.Log("Level Won. 100 coin bonus.");
             coins += (10*coinBonus);
             PauseGame();
 

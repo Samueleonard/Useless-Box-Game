@@ -7,6 +7,7 @@ public class levelControl : MonoBehaviour
 {
 
     public static levelControl instance = null;
+    [HideInInspector]
     public int sceneIndex, levelPassed;
 
     // Start is called before the first frame update

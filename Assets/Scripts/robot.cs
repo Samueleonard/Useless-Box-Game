@@ -4,45 +4,64 @@ using UnityEngine;
 
 public class robot : MonoBehaviour
 {
+    [HideInInspector]
     public GameManager gManager;
+    [HideInInspector]
     public GameObject target;
 
     private void Update()
     {
         FindTarget();
     }
-    void FindTarget() //finds the closest target, then uses dijkstras to find the shortest path to there, using the movement nodes
+    void FindTarget() //finds the closest target, then uses dijkstras to find the shortest path to there 
+                      //using the movement nodes 
+                      //TODO: movement nodes
     { 
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
         /*
         optimized by comparing distance squared instead of straight distance. 
-        avoids the expensive square root operation that happens 
-        under the hood by doing "Vector3.Distance".
-        as seen in https://forum.unity.com/threads/trying-to-find-the-minimum-vector3-distance-from-an-array.481265/
+        avoids long square root operation that happens  by doing "Vector3.Distance".
+        https://forum.unity.com/threads/trying-to-find-the-minimum-vector3-distance-from-an-array.481265/
          */
         foreach (GameObject potentialTarget in GetComponent<ShortestPath>().switches)
         {
-            Vector3 directionToTarget = potentialTarget.gameObject.transform.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            if(potentialTarget.gameObject.GetComponent<Switch>().switchedOn) //if switched off dont bother doing anything off
             {
-                closestDistanceSqr = dSqrToTarget;
-                target = potentialTarget.gameObject;
+                Debug.Log(potentialTarget.gameObject.name + "is on");
+                Vector2 directionToTarget = potentialTarget.gameObject.transform.position - currentPosition;
+                //FIXME robot moves to offset, and high in the air
+                float dSqrToTarget = (potentialTarget.gameObject.transform.position - currentPosition).sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;     
+                    target = potentialTarget.gameObject;
+                    StartCoroutine(Move(potentialTarget.gameObject.transform.position, 5));
+                }
             }
         }
 
     }
 
-    IEnumerator Flip()
+    IEnumerator Move(Vector3 targetPosition, float duration)
     {
-        yield return new WaitForSeconds(5);
-        transform.position = target.transform.position;
+        float time = 0;
+
+        while (time < duration)
+        {
+            yield return new WaitForSeconds(1f);
+            transform.position = Vector2.Lerp(transform.position, targetPosition, time / duration);
+            transform.position = targetPosition;
+            time += Time.deltaTime; //move same rate for all frame rates
+        }
+        transform.position = targetPosition;
         target.GetComponent<Switch>().switchedOn = false;
         gManager.GetComponent<GameManager>().currentFlicked--;
-        //rotate 
+        //TODO: SEPERATE MOVE CODE TO SEPERATE FUNCTION IN SWITCH CLICK AND CALL FROM HERE
+        Debug.Log("Switched Off");
     }
+
 
     //find target
         //loop through all switches
