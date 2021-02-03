@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ProgressData : MonoBehaviour
 {
-    public int level;
-    public int coins;
+    [HideInInspector]
+    public int level,coins;
+    [HideInInspector]
+    public string saveDate;
 
-    public ProgressData(GameManager gm, UnlockManager um){
-        level = um.levelPassed;
-        coins = gm.coins;
+    public ProgressData(){
+        level = GetComponent<UnlockManager>().levelPassed;
+        coins = GetComponent<GameManager>().coins;
+        //saveDate = System.DateTime.Now.ToString("yyyy-MM-dd\\Z");
     }
 }

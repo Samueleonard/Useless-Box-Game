@@ -17,10 +17,6 @@ each level has different parameters, making levels harder
 --------------------------
 
 
-thur    save/load
-
-fri    robot move
-
 mon 25   robot move
 
 wed    level design
@@ -43,15 +39,15 @@ wed      code optimisation
 
 thur     code optimisation
 
-mon
+mon     robot move
 
-tue
+tue     robot move
 
-wed
+wed       robot move
 
-thur
+thur      robot move
 
-fri
+fri    robot move
 
 sat TEST
 

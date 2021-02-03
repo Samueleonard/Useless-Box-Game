@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenuParent, amountSelectParent, settingsMenuParent, levelSelectParent,
            loadLevelParent;
+    
+    
 
 #region Main Menu
 
@@ -33,12 +35,12 @@ public class MenuManager : MonoBehaviour
     }
 
     public void SavePlayer(){
-        SaveSystem.SaveData(GetComponent<GameManager>(), GetComponent<UnlockManager>());
+        ProgressData saveData = new ProgressData();
+        //SaveSystem.SaveGame(saveData);
     }
 
     public void LoadPlayer(){
-        ProgressData data = SaveSystem.LoadData();
-        //PlayerPrefs.SetInt()
+        //ProgressData data = SaveSystem.LoadGame();
     }
 
     public void OnSettings(){

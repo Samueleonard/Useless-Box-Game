@@ -6,8 +6,10 @@ public class robot : MonoBehaviour
 {
     [HideInInspector]
     public GameManager gManager;
-    [HideInInspector]
-    public GameObject target;
+
+    private Vector3 offset = new Vector3(0,-1,0);
+
+    public int delay;
 
     private void Update()
     {
@@ -36,33 +38,29 @@ public class robot : MonoBehaviour
                 if (dSqrToTarget < closestDistanceSqr)
                 {
                     closestDistanceSqr = dSqrToTarget;     
-                    target = potentialTarget.gameObject;
-                    StartCoroutine(Move(potentialTarget.gameObject.transform.position, 5));
+                    StartCoroutine(Move(potentialTarget.gameObject.transform.position, 5f));
                 }
             }
         }
 
     }
 
-    IEnumerator Move(Vector3 targetPosition, float duration)
+    IEnumerator Move(Vector2 targetPosition, float duration)
     {
         float time = 0;
-
         while (time < duration)
         {
             yield return new WaitForSeconds(1f);
             transform.position = Vector2.Lerp(transform.position, targetPosition, time / duration);
-            transform.position = targetPosition;
-            time += Time.deltaTime; //move same rate for all frame rates
+            time = time + 1 +  Time.deltaTime; //move same rate for all frame rates
         }
-        transform.position = targetPosition;
-        target.GetComponent<Switch>().switchedOn = false;
-        gManager.GetComponent<GameManager>().currentFlicked--;
-        //TODO: SEPERATE MOVE CODE TO SEPERATE FUNCTION IN SWITCH CLICK AND CALL FROM HERE
+        Camera.main.GetComponent<SwitchClick>().FlickOff();
         Debug.Log("Switched Off");
     }
 
+    void Wait(){
 
+    }
     //find target
         //loop through all switches
         //find switch that is off

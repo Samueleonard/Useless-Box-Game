@@ -3,54 +3,55 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-public static class SaveSystem
+public class SaveSystem : MonoBehaviour
 {
-    public static void SaveData(GameManager gm, UnlockManager um){
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.sav";
-        FileStream stream = new FileStream(path, FileMode.Create);
+    // Makes it a singleton / single instance
+    static public SaveSystem instance;
+    int saveAmount = 0; //HOW MANY SAVES ARE CURRENTLY SAVED
+    private void Awake()
+    {
+        // Check there are no other instances of this class in the scene
+        if (!instance)
+            instance = this;
+        else
+            Destroy(gameObject);
 
-        //ProgressData data = EncryptDecrypt(new ProgressData(gm,um);
-        
-        //formatter.Serialize(stream, data);
-        stream.Close();
     }
 
-    public static ProgressData LoadData(){
-        string path = Application.persistentDataPath + "/player.sav";
-        if(File.Exists(path)){
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+    public void SaveGame(ProgressData saveData)
+    {
+        saveAmount++;
+        string filePath = Application.persistentDataPath + "/save" + saveAmount + ".data";
+        FileStream dataStream = new FileStream(filePath, FileMode.Create);
 
-            //ProgressData data =   EncryptDecrypt(formatter.Deserialize(stream));
-           
-            stream.Close();
+        BinaryFormatter converter = new BinaryFormatter();
+        converter.Serialize(dataStream, saveData);
 
-            //return data;
-            return null;
-        }
-        else{
-            Debug.Log("Save file not found in " + path);
-            return null;
-        }
+        dataStream.Close();
     }
 
-    public static int key = 129;
-
-    public static string EncryptDecrypt(string textToEncrypt)
-    {            
-        StringBuilder inSb = new StringBuilder(textToEncrypt);
-        StringBuilder outSb = new StringBuilder(textToEncrypt.Length);
-        char c;
-        for (int i = 0; i < textToEncrypt.Length; i++)
+    public void LoadGame(int saveAmount)
+    {
+        string filePath = Application.persistentDataPath + "/save" + saveAmount + ".data";
+        if(File.Exists(filePath))
         {
-            c = inSb[i];
-            c = (char)(c ^ key);
-            outSb.Append(c);
-        }
-        return outSb.ToString();
-    }   
-    
+            // File exists 
+            FileStream dataStream = new FileStream(filePath, FileMode.Open);
 
+            BinaryFormatter converter = new BinaryFormatter();
+            ProgressData saveData = converter.Deserialize(dataStream) as ProgressData;
+
+            dataStream.Close();
+
+            PlayerPrefs.SetInt("Coins", saveData.coins);
+            PlayerPrefs.SetInt("Level", saveData.level);
+            PlayerPrefs.SetInt("Coins", saveData.coins);
+        }
+        else
+        {
+            // File does not exist
+            Debug.LogError("Save file not found in " + filePath);
+        }
+  }
 }
 
