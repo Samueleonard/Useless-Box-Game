@@ -21,6 +21,7 @@ public class ListCreator : MonoBehaviour
   
     public GameObject savePrefab;
     public RectTransform content;
+    public TMP_Text text;
   
     // Use this for initialization  
     void Start ()   
@@ -29,7 +30,9 @@ public class ListCreator : MonoBehaviour
         {  
             //Get the path of all files inside the directory and save them on a List  
             fileNames = new List<string>( Directory.GetFiles(Application.persistentDataPath) );  
-  
+            if(fileNames.Count == 0){
+                text.text = "No Save Files found in directory. Have you saved any progress?";
+            }
             //For each string in the fileNames List   
             for (int i = 0; i < fileNames.Count; i++)  
             {  
@@ -46,7 +49,7 @@ public class ListCreator : MonoBehaviour
         //Catch any of the following exceptions and store the error message at the outputMessage string  
         catch (System.Exception e)  
         {  
-            Debug.LogError(e.Message);  
+            text.text = e.Message;  
         }  
     }  
 }

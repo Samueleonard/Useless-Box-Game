@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Transform pausePanel;
     public Transform quitPanel;
     public Transform levelWonPanel;
+    public Transform settingPanel;
 
     public Text levelText;
     public Text coinText;
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame(){
         paused = true;
         Time.timeScale = 0;
+        Camera.main.GetComponent<SwitchClick>().enabled = false;
     }
 
     public void ResumeGame(){
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         helpPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
+        settingPanel.gameObject.SetActive(false);
+        Camera.main.GetComponent<SwitchClick>().enabled = true;
     }
 
     void toggleHelpMenu(){
@@ -77,6 +81,11 @@ public class GameManager : MonoBehaviour
     public void showQuit(){
         pausePanel.gameObject.SetActive(false);
         quitPanel.gameObject.SetActive(true);
+    }
+
+    public void showSettings(){
+        pausePanel.gameObject.SetActive(false);
+        settingPanel.gameObject.SetActive(true);
     }
 
     public void QuitDesktop(){

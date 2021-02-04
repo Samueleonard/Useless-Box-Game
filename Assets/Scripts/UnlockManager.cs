@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UnlockManager : MonoBehaviour
 {
-    public Button level01Button, level02Button, level03Button;
+    public Button level01Button, level02Button, level03Button, level04Button, level05Button;
     public int levelPassed;
 
     // Start is called before the first frame update
@@ -14,6 +14,8 @@ public class UnlockManager : MonoBehaviour
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         level02Button.interactable = false;
         level03Button.interactable = false;
+        level04Button.interactable = false;
+        level05Button.interactable = false;
 
         switch(levelPassed){
             case 1:
@@ -22,6 +24,17 @@ public class UnlockManager : MonoBehaviour
             case 2:
                 level02Button.interactable = true;
                 level03Button.interactable = true;
+                break;
+            case 3:
+                level02Button.interactable = true;
+                level03Button.interactable = true;
+                level04Button.interactable = true;
+                break;
+            case 4:
+                level02Button.interactable = true;
+                level03Button.interactable = true;
+                level04Button.interactable = true;
+                level05Button.interactable = true;
                 break;
         }
     }

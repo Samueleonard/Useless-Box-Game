@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Samuel Leonard
   productName: Useless Box (CS Project)
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -93,7 +93,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 1
+  fullscreenMode: 2
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -148,7 +148,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.DefaultCompany.UselessBoxCSProject
     Lumin: com.DefaultCompany.UselessBoxCSProject
-    Standalone: com.DefaultCompany.UselessBoxCSProject
+    Standalone: com.SamuelLeonard.UselessBoxCSProject
     iPhone: com.DefaultCompany.UselessBoxCSProject
     tvOS: com.DefaultCompany.UselessBoxCSProject
   buildNumber:
