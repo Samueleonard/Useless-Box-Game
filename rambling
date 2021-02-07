@@ -16,28 +16,19 @@ each level has different parameters, making levels harder
 
 --------------------------
 
+sun    PLAYER MOve
 
-mon 25   robot move
+mon   powerup2
 
-wed    level design
+wed      post processing + settings menu
 
-thur   ui refinement on existing ui
+thur 8    vfx
 
-fri    powerups
+fri      code optimisation 
 
-mon 1   save/load
+sat     code optimisation
 
-wed    vfx
-
-thur   random powerup drops
-
-fri      post processing
-
-mon 8    player move
-
-wed      code optimisation 
-
-thur     code optimisation
+sun     level design
 
 mon     robot move
 

@@ -6,7 +6,6 @@ public class CameraMove : MonoBehaviour
 {
     // The position that that camera will be following.
     public Transform[] targetsHorizontal; 
-    public GameObject targetVertical;
 
     public int currentTargetHIndex = 0; //which target we are currently on horizontally
     // The speed with which the camera will be following.           
@@ -40,15 +39,6 @@ public class CameraMove : MonoBehaviour
             else{
                 currentTargetHIndex++;
             }
-        }
-
-        if(Input.GetKeyDown(KeyCode.UpArrow)){
-            vertical = !vertical; //are we currently in verticle and want to move down? or do we want to go to the top
-            if(vertical){
-                Vector3 targetCamPos = targetVertical.transform.position;
-                transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetVertical.transform.rotation, 200 * Time.deltaTime);
-            }                
         }
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){

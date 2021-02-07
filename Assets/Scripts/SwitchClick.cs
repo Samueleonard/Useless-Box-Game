@@ -32,8 +32,6 @@ public class SwitchClick : MonoBehaviour
 
     public void CheckTag()
     {
-        try
-        {
             //if(rayT.tag == "")
             if(rayT.gameObject.GetComponent<Switch>().switchedOn)
             {
@@ -45,11 +43,7 @@ public class SwitchClick : MonoBehaviour
                 //Debug.Log("NOW ON");
                 FlickOn(); 
             }
-        }
-        catch(System.Exception)
-        {
-            Debug.LogError("error");
-        }
+
     }
 
     public void FlickOff()

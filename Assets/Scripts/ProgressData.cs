@@ -10,8 +10,21 @@ public class ProgressData : MonoBehaviour
     public string saveDate;
 
     public ProgressData(){
-        level = GetComponent<UnlockManager>().levelPassed;
-        coins = GetComponent<GameManager>().coins;
-        //saveDate = System.DateTime.Now.ToString("yyyy-MM-dd\\Z");
+        int _level = level;
+        int _coins = coins;
+        string _saveDate = saveDate;
+    }
+
+    public void Save(){
+        GetComponent<SaveSystem>().SaveGame();
+    }
+
+    public void Load(int saveNum){
+        ProgressData loaded = GetComponent<SaveSystem>().LoadGame(saveNum);
+        
+        level = loaded.level;
+        coins = loaded.coins;
+        saveDate = loaded.saveDate;
+
     }
 }

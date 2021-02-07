@@ -33,16 +33,7 @@ public class MenuManager : MonoBehaviour
         mainMenuParent.SetActive(false);
         loadLevelParent.SetActive(true);
     }
-
-    public void SavePlayer(){
-        ProgressData saveData = new ProgressData();
-        //SaveSystem.SaveGame(saveData);
-    }
-
-    public void LoadPlayer(){
-        //ProgressData data = SaveSystem.LoadGame();
-    }
-
+    
     public void OnSettings(){
         Debug.Log("Settings Pressed");
         mainMenuParent.SetActive(false);
@@ -88,7 +79,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ResetPrefs(){
-        PlayerPrefs.DeleteKey("LevelPassed");
+        PlayerPrefs.DeleteAll();
     }
 #endregion
 

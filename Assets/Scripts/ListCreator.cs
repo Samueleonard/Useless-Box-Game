@@ -36,15 +36,18 @@ public class ListCreator : MonoBehaviour
             //For each string in the fileNames List   
             for (int i = 0; i < fileNames.Count; i++)  
             {  
-                //instantiate 
-                GameObject buttonPrefab = Instantiate(savePrefab);
                 string saveName = Path.GetFileName(fileNames[i]).Split('.')[0];
-                buttonPrefab.transform.SetParent(content, false);
-                buttonPrefab.name = saveName;  //remove the .save from the file name
-                buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
-                int saveInt = int.Parse(saveName.Split('e')[1]);
-                buttonPrefab.transform.Find("LoadButton").GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });
-            }     
+                if(Path.GetFileName(fileNames[i]).Split('.')[1] == "data")
+                {
+                    //instantiate 
+                    GameObject buttonPrefab = Instantiate(savePrefab);
+                    buttonPrefab.transform.SetParent(content, false);
+                    buttonPrefab.name = saveName;  //remove the .save from the file name
+                    buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
+                    int saveInt = int.Parse(saveName.Split('e')[1]);
+buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Load(saveInt) ; });                    
+                }     
+            }
         }  
         //Catch any of the following exceptions and store the error message at the outputMessage string  
         catch (System.Exception e)  

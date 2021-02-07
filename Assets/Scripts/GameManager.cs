@@ -9,21 +9,25 @@ public class GameManager : MonoBehaviour
 {
     public int currentFlicked; //how many switches are currently flicked
     public int winFlicked; //how many need to be flicked to win
-    private bool paused = false;
+    public bool paused = false;
     public Transform helpPanel;
     public Transform pausePanel;
     public Transform quitPanel;
     public Transform levelWonPanel;
     public Transform settingPanel;
+    public Transform economyPanel;
 
     public Text levelText;
     public Text coinText;
 
-    public int coins;
+    public int coins = 0;
     public int coinBonus = 1;
+
+    public Button saveButton;
 
     private void Start() {
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+        saveButton.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Save(); });
     }
     // Update is called once per frame
     void Update()
@@ -33,16 +37,19 @@ public class GameManager : MonoBehaviour
             quitPanel.gameObject.SetActive(false);
             helpPanel.gameObject.SetActive(false);
             levelWonPanel.gameObject.SetActive(true);
+            economyPanel.gameObject.SetActive(false);
             levelControl.instance.Win();
             Camera.main.GetComponent<SwitchClick>().enabled = false;
             coins += (10*coinBonus);
             PauseGame();
 
         }
-        if(Input.GetKeyDown(KeyCode.I) && !paused)
+        if(Input.GetKeyDown(KeyCode.I) && !paused && economyPanel.gameObject.activeSelf == false)
             toggleHelpMenu();
         if(Input.GetKeyDown(KeyCode.Escape) && helpPanel.gameObject.activeSelf == false)
             togglePauseMenu();
+        if(Input.GetKeyDown(KeyCode.E) && !paused && helpPanel.gameObject.activeSelf == false)
+            toggleEconomyMenu();
         
         if(paused)
             PauseGame();
@@ -65,6 +72,7 @@ public class GameManager : MonoBehaviour
         helpPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
         settingPanel.gameObject.SetActive(false);
+        //economyPanel.gameObject.SetActive(false);
         Camera.main.GetComponent<SwitchClick>().enabled = true;
     }
 
@@ -78,6 +86,11 @@ public class GameManager : MonoBehaviour
         pausePanel.gameObject.SetActive(!pausePanel.gameObject.activeSelf);
     }
 
+    void toggleEconomyMenu(){
+        Time.timeScale = 0.1f;
+        Camera.main.GetComponent<SwitchClick>().enabled = !Camera.main.GetComponent<SwitchClick>().isActiveAndEnabled;
+        economyPanel.gameObject.SetActive(!economyPanel.gameObject.activeSelf);
+    }
     public void showQuit(){
         pausePanel.gameObject.SetActive(false);
         quitPanel.gameObject.SetActive(true);

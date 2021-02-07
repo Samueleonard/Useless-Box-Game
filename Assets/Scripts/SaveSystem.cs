@@ -5,24 +5,18 @@ using System.Text;
 
 public class SaveSystem : MonoBehaviour
 {
-    // Makes it a singleton / single instance
-    static public SaveSystem instance;
     int saveAmount = 0; //HOW MANY SAVES ARE CURRENTLY SAVED
-    private void Awake()
-    {
-        // Check there are no other instances of this class in the scene
-        if (!instance)
-            instance = this;
-        else
-            Destroy(gameObject);
 
-    }
 
-    public void SaveGame(ProgressData saveData)
+    public void SaveGame()
     {
+        Debug.Log("saving");
         saveAmount++;
-        string filePath = Application.persistentDataPath + "/save" + saveAmount + ".data";
-        FileStream dataStream = new FileStream(filePath, FileMode.Create);
+        ProgressData saveData = new ProgressData();
+        saveData.coins = GetComponent<GameManager>().coins;
+        saveData.level = GetComponent<UnlockManager>().levelPassed;
+        saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
+        FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveAmount + ".data", FileMode.Create);
 
         BinaryFormatter converter = new BinaryFormatter();
         converter.Serialize(dataStream, saveData);
@@ -30,28 +24,22 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
     }
 
-    public void LoadGame(int saveAmount)
+    public ProgressData LoadGame(int saveNumber)
     {
-        string filePath = Application.persistentDataPath + "/save" + saveAmount + ".data";
-        if(File.Exists(filePath))
-        {
-            // File exists 
-            FileStream dataStream = new FileStream(filePath, FileMode.Open);
+        Debug.Log("loading save " + saveNumber);
+        FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveNumber + ".data", FileMode.Open);
 
-            BinaryFormatter converter = new BinaryFormatter();
-            ProgressData saveData = converter.Deserialize(dataStream) as ProgressData;
+        BinaryFormatter converter = new BinaryFormatter();
+        ProgressData saveData = converter.Deserialize(dataStream) as ProgressData;
 
-            dataStream.Close();
+        dataStream.Close();
 
-            PlayerPrefs.SetInt("Coins", saveData.coins);
-            PlayerPrefs.SetInt("Level", saveData.level);
-            PlayerPrefs.SetInt("Coins", saveData.coins);
-        }
-        else
-        {
-            // File does not exist
-            Debug.LogError("Save file not found in " + filePath);
-        }
+        ProgressData save = new ProgressData();
+        save.coins = saveData.coins;
+        save.level = saveData.level;
+        save.saveDate = saveData.saveDate;
+        
+        return save;
   }
 }
 
