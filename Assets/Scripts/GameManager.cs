@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public Button saveButton;
 
+    public Text economyCoinText;
+
     private void Start() {
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Save(); });
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
             ResumeGame();
         
         coinText.text = "Coins : " + coins.ToString();
+        economyCoinText.text = "Coins : " + coins.ToString();
         
     }
 
@@ -87,10 +90,12 @@ public class GameManager : MonoBehaviour
     }
 
     void toggleEconomyMenu(){
-        Time.timeScale = 0.1f;
+        coinText.enabled = !coinText.isActiveAndEnabled;
+        Time.timeScale = 0;
         Camera.main.GetComponent<SwitchClick>().enabled = !Camera.main.GetComponent<SwitchClick>().isActiveAndEnabled;
         economyPanel.gameObject.SetActive(!economyPanel.gameObject.activeSelf);
     }
+
     public void showQuit(){
         pausePanel.gameObject.SetActive(false);
         quitPanel.gameObject.SetActive(true);

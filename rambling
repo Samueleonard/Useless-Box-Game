@@ -16,15 +16,13 @@ each level has different parameters, making levels harder
 
 --------------------------
 
-sun    PLAYER MOve
-
-mon   powerup2
+tue?    plan ROBOT MOVE - breakdown + pseudocode?
 
 wed      post processing + settings menu
 
 thur 8    vfx
 
-fri      code optimisation 
+fri      save/load
 
 sat     code optimisation
 

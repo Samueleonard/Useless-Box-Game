@@ -7,8 +7,6 @@ public class robot : MonoBehaviour
     [HideInInspector]
     public GameManager gManager;
 
-    private Vector3 offset = new Vector3(0,-1,0);
-
     public int delay;
 
     private void Update()
@@ -57,10 +55,7 @@ public class robot : MonoBehaviour
         Camera.main.GetComponent<SwitchClick>().FlickOff();
         Debug.Log("Switched Off");
     }
-
-    void Wait(){
-
-    }
+    
     //find target
         //loop through all switches
         //find switch that is off
