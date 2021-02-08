@@ -38,6 +38,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Settings Pressed");
         mainMenuParent.SetActive(false);
         settingsMenuParent.SetActive(true);
+        pages[0].SetActive(true);
     }
 
     public void OnQuit(){

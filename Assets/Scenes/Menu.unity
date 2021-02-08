@@ -3962,7 +3962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reset
+  m_text: Reset Prefs
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5294,6 +5294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 265743367}
     m_Modifications:
+    - target: {fileID: 6162674408019635291, guid: 29029e7e4b686a04985eb8a83992e135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6162674408146824444, guid: 29029e7e4b686a04985eb8a83992e135, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
