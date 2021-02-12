@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class FPSCounter : MonoBehaviour
 {
-    public Text fpsDisplay;
+    public TMPro.TMP_Text fpsDisplay;
 
     private void Start() {
         Application.targetFrameRate = 100;    

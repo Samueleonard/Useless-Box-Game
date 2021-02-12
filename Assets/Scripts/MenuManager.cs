@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
 #region Main Menu
 
     private void Start() {
+        PlayerPrefs.DeleteAll();
         Debug.Log("Menu Init");
         mainMenuParent.SetActive(true);
         settingsMenuParent.SetActive(false);

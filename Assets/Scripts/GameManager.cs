@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 
@@ -14,11 +15,13 @@ public class GameManager : MonoBehaviour
     public Transform pausePanel;
     public Transform quitPanel;
     public Transform levelWonPanel;
-    public Transform settingPanel;
     public Transform economyPanel;
+    public Transform goToMenuPanel;
 
-    public Text levelText;
-    public Text coinText;
+    public TMP_Text levelText;
+    public TMP_Text coinText;
+    public TMP_Text timeText; //how much time has elapsed since starting level
+    public TMP_Text timeWonText; //how much time level took - showed on level won screen
 
     public int coins = 0;
     public int coinBonus = 1;
@@ -27,18 +30,27 @@ public class GameManager : MonoBehaviour
 
     public Text economyCoinText;
 
+    public GameObject saveManager;
+
+    public float time = 0;
+
     private void Start() {
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
-        saveButton.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Save(); });
+        saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
     }
     // Update is called once per frame
     void Update()
     {
-        if(currentFlicked == winFlicked){
+        time += Time.deltaTime;
+        timeText.text = Mathf.Round(time).ToString() + " secs";
+        coinText.text = "Coins : " + coins.ToString();
+        economyCoinText.text = "Coins : " + coins.ToString();
+        if(currentFlicked == winFlicked && !paused){
+            coinText.enabled = false;
             pausePanel.gameObject.SetActive(false);
-            quitPanel.gameObject.SetActive(false);
             helpPanel.gameObject.SetActive(false);
             levelWonPanel.gameObject.SetActive(true);
+            timeWonText.text = "Completed in " + Mathf.Round(time) + " Seconds";
             economyPanel.gameObject.SetActive(false);
             levelControl.instance.Win();
             Camera.main.GetComponent<SwitchClick>().enabled = false;
@@ -58,9 +70,6 @@ public class GameManager : MonoBehaviour
         else
             ResumeGame();
         
-        coinText.text = "Coins : " + coins.ToString();
-        economyCoinText.text = "Coins : " + coins.ToString();
-        
     }
 
     public void PauseGame(){
@@ -74,8 +83,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         helpPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(false);
-        settingPanel.gameObject.SetActive(false);
-        //economyPanel.gameObject.SetActive(false);
+        economyPanel.gameObject.SetActive(false);
         Camera.main.GetComponent<SwitchClick>().enabled = true;
     }
 
@@ -97,13 +105,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void showQuit(){
+        Debug.Log("show quit");
         pausePanel.gameObject.SetActive(false);
+        levelWonPanel.gameObject.SetActive(false);
         quitPanel.gameObject.SetActive(true);
-    }
-
-    public void showSettings(){
-        pausePanel.gameObject.SetActive(false);
-        settingPanel.gameObject.SetActive(true);
     }
 
     public void QuitDesktop(){
@@ -116,6 +121,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int index){
         SceneManager.LoadScene(levelControl.instance.sceneIndex+1);
+    }
+
+    public void ToggleGoToMenuPanel(){
+        pausePanel.gameObject.SetActive(!pausePanel.gameObject.activeSelf);
+        goToMenuPanel.gameObject.SetActive(!goToMenuPanel.gameObject.activeSelf); //if on, off vice versa
     }
 
 }

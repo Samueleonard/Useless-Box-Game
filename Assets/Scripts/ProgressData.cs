@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ProgressData : MonoBehaviour
 {
-    [HideInInspector]
     public int level,coins;
-    [HideInInspector]
     public string saveDate;
 
     public ProgressData(){
@@ -15,16 +14,4 @@ public class ProgressData : MonoBehaviour
         string _saveDate = saveDate;
     }
 
-    public void Save(){
-        GetComponent<SaveSystem>().SaveGame();
-    }
-
-    public void Load(int saveNum){
-        ProgressData loaded = GetComponent<SaveSystem>().LoadGame(saveNum);
-        
-        level = loaded.level;
-        coins = loaded.coins;
-        saveDate = loaded.saveDate;
-
-    }
 }

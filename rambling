@@ -14,6 +14,7 @@ each level has different parameters, making levels harder
         at start of level, check if level is included in the list, if it is, show switch, else hide
 
 
+------------------------------------
 find distances to each switch that is off
 find closest switch
 wait 5 seconds
@@ -31,8 +32,6 @@ animate robot
 fix any other issues
 
 --------------------------
-
-tue?    plan ROBOT MOVE - breakdown + pseudocode?
 
 fri      save/load
 
@@ -55,6 +54,8 @@ sat TEST
 sun TEST
 
 mon?
+
+tue?
 
 wed?
 

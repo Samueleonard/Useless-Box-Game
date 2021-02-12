@@ -32,16 +32,17 @@ public class SwitchClick : MonoBehaviour
 
     public void CheckTag()
     {
-            //if(rayT.tag == "")
-            if(rayT.gameObject.GetComponent<Switch>().switchedOn)
-            {
-                //Debug.Log("NOW OFF");
-                FlickOff(); 
-            }
-            else
-            {
-                //Debug.Log("NOW ON");
-                FlickOn(); 
+            if(rayT.tag.Contains("Switch")){
+                if(rayT.gameObject.GetComponent<Switch>().switchedOn)
+                {
+                    //Debug.Log("NOW OFF");
+                    FlickOff(); 
+                }
+                else
+                {
+                    //Debug.Log("NOW ON");
+                    FlickOn(); 
+                }
             }
 
     }

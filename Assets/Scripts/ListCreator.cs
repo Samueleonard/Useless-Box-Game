@@ -47,7 +47,8 @@ public class ListCreator : MonoBehaviour
                     buttonPrefab.name = saveName;  //remove the .save from the file name
                     buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
                     int saveInt = int.Parse(saveName.Split('e')[1]);
-                    buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Load(saveInt) ; });                    
+                    PlayerPrefs.SetInt("SaveAmount", saveInt);
+                    buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
                 }     
             }
             if(saves == 0){
