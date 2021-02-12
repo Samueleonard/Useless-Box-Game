@@ -57,7 +57,7 @@ public class ListCreator : MonoBehaviour
         //Catch any of the following exceptions and store the error message at the outputMessage string  
         catch (System.Exception e)  
         {  
-            text.text = e.Message;  
+            text.text = "ERROR - " + e.Message + " \nREPORT TO ME";  
         }  
     }  
 }
