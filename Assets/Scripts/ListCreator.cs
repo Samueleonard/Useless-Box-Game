@@ -22,6 +22,8 @@ public class ListCreator : MonoBehaviour
     public GameObject savePrefab;
     public RectTransform content;
     public TMP_Text text;
+
+    int saves = 0;
   
     // Use this for initialization  
     void Start ()   
@@ -30,23 +32,26 @@ public class ListCreator : MonoBehaviour
         {  
             //Get the path of all files inside the directory and save them on a List  
             fileNames = new List<string>( Directory.GetFiles(Application.persistentDataPath) );  
-            if(fileNames.Count == 0){
-                text.text = "No Save Files found in directory. Have you saved any progress?";
-            }
             //For each string in the fileNames List   
             for (int i = 0; i < fileNames.Count; i++)  
             {  
-                string saveName = Path.GetFileName(fileNames[i]).Split('.')[0];
-                if(Path.GetFileName(fileNames[i]).Split('.')[1] == "data")
+                string[] fileName = Path.GetFileName(fileNames[i]).Split('.'); //
+                string saveName = fileName[0];
+                string fileType = fileName[1];
+                if(fileType == "data")
                 {
+                    saves++;
                     //instantiate 
                     GameObject buttonPrefab = Instantiate(savePrefab);
                     buttonPrefab.transform.SetParent(content, false);
                     buttonPrefab.name = saveName;  //remove the .save from the file name
                     buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
                     int saveInt = int.Parse(saveName.Split('e')[1]);
-buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Load(saveInt) ; });                    
+                    buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<ProgressData>().Load(saveInt) ; });                    
                 }     
+            }
+            if(saves == 0){
+                text.text = "No Save Files found in directory. Have you saved any progress?";
             }
         }  
         //Catch any of the following exceptions and store the error message at the outputMessage string  

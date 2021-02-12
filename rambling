@@ -14,6 +14,22 @@ each level has different parameters, making levels harder
         at start of level, check if level is included in the list, if it is, show switch, else hide
 
 
+find distances to each switch that is off
+find closest switch
+wait 5 seconds
+
+turn switch off
+go to next switch
+create nodes for path movement (empty gameobjects ) - list?
+NO MOVEMENT OF BOT YET
+
+movement of bot to switch
+queue of switches?
+find path to switch via nodes - dijkstra
+
+animate robot
+fix any other issues
+
 --------------------------
 
 tue?    plan ROBOT MOVE - breakdown + pseudocode?
