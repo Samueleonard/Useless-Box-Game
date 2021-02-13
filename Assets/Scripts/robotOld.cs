@@ -52,7 +52,7 @@ public class robot : MonoBehaviour
             transform.position = Vector2.Lerp(transform.position, targetPosition, time / duration);
             time = time + 1 +  Time.deltaTime; //move same rate for all frame rates
         }
-        Camera.main.GetComponent<SwitchClick>().FlickOff();
+        //Camera.main.GetComponent<SwitchClick>().FlickOff();
         Debug.Log("Switched Off");
     }
     

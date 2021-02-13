@@ -10,7 +10,8 @@ public class SwitchClick : MonoBehaviour
 
     public Transform rayT;
 
-    private void Start() {
+    private void Start() 
+    {
         coinBonus = gManager.coinBonus;
     }
 
@@ -19,52 +20,65 @@ public class SwitchClick : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 100f)){
-            if(hit.transform != null){ //if we hit something
-                if(Input.GetKeyDown(KeyCode.Mouse0)){
-
+        
+        if(Physics.Raycast(ray, out hit, 100f))
+        {
+            if(hit.transform != null) //if we hit something
+            { 
+                if(Input.GetKeyDown(KeyCode.Mouse0))
+                {
                     rayT = hit.transform;
-                    CheckTag();
+                    CheckTag(rayT.tag);
                 }
             }
-        }
+        }   
     }
 
-    public void CheckTag()
+
+    public void CheckTag(string tag)
     {
-            if(rayT.tag.Contains("Switch")){
-                if(rayT.gameObject.GetComponent<Switch>().switchedOn)
-                {
-                    //Debug.Log("NOW OFF");
-                    FlickOff(); 
-                }
+        if(tag.Contains("Switch"))
+        {
+            if(!rayT.gameObject.GetComponent<Switch>().switchedOn) //if switched off, switch on
+            {
+                if(tag == "RightSwitch")
+                    FlickForward();
                 else
-                {
-                    //Debug.Log("NOW ON");
-                    FlickOn(); 
-                }
+                    FlickBackwards();
+                rayT.gameObject.GetComponent<Switch>().switchedOn = true;
+                gManager.GetComponent<GameManager>().currentFlicked++;
             }
-
+            else  //switched on, switch off
+            {    
+                if(tag == "RightSwitch")
+                    FlickBackwards();
+                else
+                    FlickForward();
+                rayT.gameObject.GetComponent<Switch>().switchedOn = false;
+                gManager.GetComponent<GameManager>().currentFlicked--;
+            }    
+        }      
     }
 
-    public void FlickOff()
-    {
-        gManager.GetComponent<GameManager>().currentFlicked--;
-        rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
-                                                            rayT.gameObject.transform.eulerAngles.y,
-                                                            50);
-        rayT.gameObject.GetComponent<AudioSource>().Play();
-        rayT.gameObject.GetComponent<Switch>().switchedOn = false;
-        gManager.coins-=10;
-    }
+        public void FlickForward()
+        {
+            rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
+                                                                rayT.gameObject.transform.eulerAngles.y,
+                                                                25);
+            rayT.gameObject.GetComponent<AudioSource>().Play();
 
-    public void FlickOn(){
-        gManager.GetComponent<GameManager>().currentFlicked++;
-        rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
-                                                            rayT.gameObject.transform.eulerAngles.y,
-                                                            -50);
-        rayT.gameObject.GetComponent<AudioSource>().Play();
-        rayT.gameObject.GetComponent<Switch>().switchedOn = true;
-        gManager.coins+=10;
-    }
+            gManager.coins-=10;
+        }
+
+        public void FlickBackwards()
+        {
+            rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
+                                                                rayT.gameObject.transform.eulerAngles.y,
+                                                                -25);
+            rayT.gameObject.GetComponent<AudioSource>().Play();
+            rayT.gameObject.GetComponent<Switch>().switchedOn = true;
+            gManager.coins+=10;
+        }
 }
+
+
