@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int currentFlicked; //how many switches are currently flicked
-    public int winFlicked; //how many need to be flicked to win
+    private int winFlicked; //how many need to be flicked to win
     public bool paused = false;
     public Transform helpPanel;
     public Transform pausePanel;
@@ -34,7 +34,10 @@ public class GameManager : MonoBehaviour
 
     public float time = 0;
 
+    public bool tutorialPassed;
+
     private void Start() {
+        winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
     }
@@ -67,8 +70,6 @@ public class GameManager : MonoBehaviour
         
         if(paused)
             PauseGame();
-        else
-            ResumeGame();
         
     }
 
