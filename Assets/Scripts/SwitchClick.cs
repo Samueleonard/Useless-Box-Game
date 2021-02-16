@@ -60,25 +60,25 @@ public class SwitchClick : MonoBehaviour
         }      
     }
 
-        public void FlickForward()
-        {
-            rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
-                                                                rayT.gameObject.transform.eulerAngles.y,
-                                                                25);
-            rayT.gameObject.GetComponent<AudioSource>().Play();
+    public void FlickForward()
+    {
+        rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
+                                                            rayT.gameObject.transform.eulerAngles.y,
+                                                            25);
+        rayT.gameObject.GetComponent<AudioSource>().Play();
 
-            gManager.coins-=10;
-        }
+        gManager.coins-=10;
+    }
 
-        public void FlickBackwards()
-        {
-            rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
-                                                                rayT.gameObject.transform.eulerAngles.y,
-                                                                -25);
-            rayT.gameObject.GetComponent<AudioSource>().Play();
-            rayT.gameObject.GetComponent<Switch>().switchedOn = true;
-            gManager.coins+=10;
-        }
+    public void FlickBackwards()
+    {
+        rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
+                                                            rayT.gameObject.transform.eulerAngles.y,
+                                                            -25);
+        rayT.gameObject.GetComponent<AudioSource>().Play();
+        rayT.gameObject.GetComponent<Switch>().switchedOn = true;
+        gManager.coins+=10;
+    }
 }
 
 

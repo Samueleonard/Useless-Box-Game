@@ -15,14 +15,6 @@ each level has different parameters, making levels harder
 
 
 ------------------------------------
-find distances to each switch that is off
-find closest switch
-wait 5 seconds
-
-turn switch off
-go to next switch
-create nodes for path movement (empty gameobjects ) - list?
-NO MOVEMENT OF BOT YET
 
 movement of bot to switch
 queue of switches?
@@ -32,10 +24,6 @@ animate robot
 fix any other issues
 
 --------------------------
-
-sat     code optimisation
-
-sun     level design
 
 mon     robot move
 

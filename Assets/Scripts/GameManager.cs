@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
         
         if(paused)
             PauseGame();
+
+        if(coins < 0)
+            coins = 0;
         
     }
 

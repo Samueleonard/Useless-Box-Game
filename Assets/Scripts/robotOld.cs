@@ -25,6 +25,7 @@ public class robot : MonoBehaviour
         avoids long square root operation that happens  by doing "Vector3.Distance".
         https://forum.unity.com/threads/trying-to-find-the-minimum-vector3-distance-from-an-array.481265/
          */
+        /*
         foreach (GameObject potentialTarget in GetComponent<ShortestPath>().switches)
         {
             if(potentialTarget.gameObject.GetComponent<Switch>().switchedOn) //if switched off dont bother doing anything off
@@ -40,7 +41,7 @@ public class robot : MonoBehaviour
                 }
             }
         }
-
+        */
     }
 
     IEnumerator Move(Vector2 targetPosition, float duration)

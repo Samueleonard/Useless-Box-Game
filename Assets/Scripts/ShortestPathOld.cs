@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShortestPath : MonoBehaviour
 {
 
+/*
     public GameObject[] switches;
 
     public List<Transform> FindShortestPath(Transform start, Transform end)
@@ -89,5 +90,5 @@ public class ShortestPath : MonoBehaviour
 
         return end;
     }
-
+*/
 }
