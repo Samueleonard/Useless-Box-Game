@@ -10,6 +10,8 @@ public class Economy : MonoBehaviour
     public TMPro.TMP_Text statusText;
     public bool activePwrup;
 
+    public GameObject robot;
+
     public void Buy(string purchased, float duration, int cost){
         if(cost <= GetComponent<GameManager>().coins && !activePwrup) //if we have enough to buy and dont already have a pwr up
         {
@@ -31,7 +33,7 @@ public class Economy : MonoBehaviour
 
     public IEnumerator CoinBoost(float wait)
     {
-        int orig = GetComponent<GameManager>().coinBonus;
+        int orig = GetComponent<GameManager>().coinBonus; //original
         GetComponent<GameManager>().coinBonus = 5; // add boost
         yield return new WaitForSeconds(wait);
         GetComponent<GameManager>().coinBonus = orig; // remove boost
@@ -39,22 +41,22 @@ public class Economy : MonoBehaviour
         activePwrup = false;
     }
 
-    public IEnumerator RobotFreeze(float wait)
+    public IEnumerator RobotFreeze(float wait) //increase delay to huge amount
     {
-        //int orig = GetComponent<GameManager>().coinBonus;
-        //GetComponent<GameManager>().coinBonus = 5; // add boost
+        float orig = robot.GetComponent<Robot>().delay; //original
+        robot.GetComponent<Robot>().delay = 2000; // add boost
         yield return new WaitForSeconds(wait);
-        //GetComponent<GameManager>().coinBonus = orig; // remove boost
+        robot.GetComponent<Robot>().delay = orig; // remove boost
         statusText.text = "";
         activePwrup = false;
     }
 
-    public IEnumerator RobotSlow(float wait)
+    public IEnumerator RobotSlow(float wait) //slow delay by 1.5x
     {
-        //int orig = GetComponent<GameManager>().coinBonus;
-        //GetComponent<GameManager>().coinBonus = 5; // add boost
+        float orig = robot.GetComponent<Robot>().delay; //original
+        robot.GetComponent<Robot>().delay = orig * 1.5f; // add boost
         yield return new WaitForSeconds(wait);
-        //GetComponent<GameManager>().coinBonus = orig; // remove boost
+        robot.GetComponent<Robot>().delay = orig; // remove boost
         statusText.text = "";
         activePwrup = false;
     }

@@ -17,9 +17,6 @@ each level has different parameters, making levels harder
 ------------------------------------
 
 movement of bot to switch
-queue of switches?
-find path to switch via nodes - dijkstra
-
 animate robot
 fix any other issues
 

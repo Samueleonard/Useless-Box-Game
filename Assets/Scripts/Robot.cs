@@ -6,6 +6,7 @@ public class Robot : MonoBehaviour
 {
     public GameObject[] switches;
     public GameObject target = null;
+    Vector3 targetPos = new Vector3(0,0,0);
     
     float distToTarget;
     float closestDist = Mathf.Infinity;
@@ -14,10 +15,10 @@ public class Robot : MonoBehaviour
 
     public GameManager gameManager;
 
-    public int delay; //
+    public float delay; //the robot delay - can be changed from elsewhere
 
     private void Start() {
-        delay = 5;
+        delay = gameManager.delay;
     }
 
     // Update is called once per frame
@@ -55,24 +56,29 @@ public class Robot : MonoBehaviour
                 }
             }
         }
-     
+        //targetPos = bestTarget.transform.position;
         return bestTarget;
     }
 
-    IEnumerator ChangeTarget()
+    IEnumerator ChangeTarget() //TODO: terrible name - should probably rename it
     {
         /*
-        wait DELAY seconds
+        wait DELAY seconds - 
         move to switch
-        visibly flip switch
-        change flip state
-        reduce coins
-        reduce score
+        visibly flip switch - 
+        change flip state - 
+        reduce coins - 
+        reduce score -
         */
-        yield return new WaitForSeconds(1);
-        Flick();
-        target = null;
-        yield return null;
+        if(target.GetComponent<Switch>().switchedOn) //double check if switch is still on, could be switched off by user
+        {
+            yield return new WaitForSeconds(delay/2);
+            Move();
+            yield return new WaitForSeconds(delay/2);
+            Flick();
+            target = null;
+            yield return null; //breakout of fucntion
+        }
     }
 
     void Flick()
@@ -84,6 +90,18 @@ public class Robot : MonoBehaviour
             Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag); //re use flick function that the player uses
             target.GetComponent<Switch>().switchedOn = false;
         }
+    }
+
+    void Move()
+    {
+        Debug.Log("moving to target");
+        /*
+        move smoothly to target (via movement nodes?)
+        animate arm move
+        */
+        Debug.Log(target.transform.position);
+        //this.transform.position = targetPos;
+        Debug.Log("moved to target");
     }
 }
 
