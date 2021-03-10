@@ -51,12 +51,12 @@ public class Economy : MonoBehaviour
         activePwrup = false;
     }
 
-    public IEnumerator RobotSlow(float wait) //slow delay by 1.5x
+    public IEnumerator RobotSlow(float wait) //slow speed by 50%
     {
-        float orig = robot.GetComponent<Robot>().delay; //original
-        robot.GetComponent<Robot>().delay = orig * 1.5f; // add boost
+        float orig = robot.GetComponent<PathManager>().moveSpeed; //original
+        robot.GetComponent<PathManager>().moveSpeed = orig * 0.5f; // add boost
         yield return new WaitForSeconds(wait);
-        robot.GetComponent<Robot>().delay = orig; // remove boost
+        robot.GetComponent<PathManager>().moveSpeed = orig; // remove boost
         statusText.text = "";
         activePwrup = false;
     }

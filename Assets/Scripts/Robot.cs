@@ -11,8 +11,6 @@ public class Robot : MonoBehaviour
     float distToTarget;
     float closestDist = Mathf.Infinity;
 
-    public GameObject[] movementNodes; //movement nodes for dijkstra
-
     public GameManager gameManager;
 
     public float delay; //the robot delay - can be changed from elsewhere
@@ -75,7 +73,7 @@ public class Robot : MonoBehaviour
             yield return new WaitForSeconds(delay/2);
             Move();
             yield return new WaitForSeconds(delay/2);
-            Flick();
+            //Flick();
             target = null;
             yield return null; //breakout of fucntion
         }
@@ -83,18 +81,16 @@ public class Robot : MonoBehaviour
 
     void Flick()
     {
-        if(target.GetComponent<Switch>().switchedOn) //double check if switch is still on, could be switched off by user
-        {
-            gameManager.GetComponent<GameManager>().coins-=10;
-            gameManager.GetComponent<GameManager>().currentFlicked--;
-            Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag); //re use flick function that the player uses
-            target.GetComponent<Switch>().switchedOn = false;
-        }
+        gameManager.GetComponent<GameManager>().coins-=10;
+        gameManager.GetComponent<GameManager>().currentFlicked--;
+        Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag); //re use flick function that the player uses
+        target.GetComponent<Switch>().switchedOn = false;
     }
 
     void Move()
     {
         Debug.Log("moving to target");
+        //GetComponent<PathManager>().NavigateTo(targetPos);
         /*
         move smoothly to target (via movement nodes?)
         animate arm move

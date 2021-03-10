@@ -7,13 +7,14 @@ using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenuParent, amountSelectParent, settingsMenuParent, levelSelectParent,
-           loadLevelParent;
+           loadLevelParent, changeLogParent, changeLogPanel;
     
     
 
 #region Main Menu
 
     private void Start() {
+        //close any windows that may be open, perhaps accidentally
         PlayerPrefs.DeleteAll();
         Debug.Log("Menu Init");
         mainMenuParent.SetActive(true);
@@ -21,6 +22,8 @@ public class MenuManager : MonoBehaviour
         amountSelectParent.SetActive(false);  
         levelSelectParent.SetActive(false);  
         loadLevelParent.SetActive(false);
+        changeLogPanel.SetActive(false);
+        changeLogParent.SetActive(false);
     }
 
     public void OnPlayButton(){
@@ -45,6 +48,12 @@ public class MenuManager : MonoBehaviour
     public void OnQuit(){
         Debug.Log("Quitting");
         Application.Quit();
+    }
+
+    public void ToggleChangeLog(){
+        changeLogParent.SetActive(!changeLogParent.activeSelf);
+        if(changeLogPanel.activeSelf) //hide big white panel when closing the panel
+            changeLogPanel.SetActive(false);
     }
 
 #endregion

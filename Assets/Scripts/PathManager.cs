@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-	public float walkSpeed = 5.0f;
+	public float moveSpeed = 5.0f;
 
 	private Stack<Vector3> currentPath;
 	private Vector3 currentWaypointPosition;
@@ -60,6 +60,10 @@ public class PathManager : MonoBehaviour
 		moveTimeTotal = 0;
 		moveTimeCurrent = 0;
 	}
+	
+	private void Start() {
+		//this.transform.position = 
+	}
 
 	void Update()
 	{
@@ -79,7 +83,7 @@ public class PathManager : MonoBehaviour
 				else
 				{
 					moveTimeCurrent = 0;
-					moveTimeTotal = (currentWaypointPosition - currentPath.Peek ()).magnitude / walkSpeed;
+					moveTimeTotal = (currentWaypointPosition - currentPath.Peek ()).magnitude / moveSpeed;
 				}
 			}
 		}
