@@ -17,7 +17,8 @@ public class Robot : MonoBehaviour
 
     private void Start() {
         foreach (Transform child in GameObject.Find("Switches").transform)
-            switches.Add(child.gameObject); //improve modularity by dynamically finding children, rather than predefining
+            if(child.gameObject.name.Contains("Switch"))
+                switches.Add(child.gameObject); //improve modularity by dynamically finding children, rather than predefining
         delay = gameManager.delay;
     }
 
@@ -75,9 +76,9 @@ public class Robot : MonoBehaviour
             yield return new WaitForSeconds(delay/2);
             Move();
             yield return new WaitForSeconds(delay/2);
-            //Flick();
+            Flick();
             target = null;
-            yield return null; //breakout of fucntion
+            yield return null; //breakout of function
         }
     }
 
@@ -97,7 +98,7 @@ public class Robot : MonoBehaviour
         move smoothly to target (via movement nodes?)
         animate arm move
         */
-        Debug.Log(target.transform.position);
+        //Debug.Log(target.transform.position);
         //this.transform.position = targetPos;
         Debug.Log("moved to target");
     }

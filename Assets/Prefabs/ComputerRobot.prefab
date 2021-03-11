@@ -141,9 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f26f18e25f0d44a89feeeb90674f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switches:
-  - {fileID: 0}
-  - {fileID: 0}
+  switches: []
   target: {fileID: 0}
   gameManager: {fileID: 0}
   delay: 0
