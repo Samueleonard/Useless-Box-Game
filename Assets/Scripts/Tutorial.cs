@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class Tutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Camera.main.GetComponent<SwitchClick>().enabled = false;
-        Camera.main.GetComponent<CameraMove>().enabled = false;
-        this.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        if(SceneManager.GetActiveScene().index) == 1) //only run the tutorial for the first level
+        {
+            Camera.main.GetComponent<SwitchClick>().enabled = false;
+            Camera.main.GetComponent<CameraMove>().enabled = false;
+            this.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     public void EndTutorial()
