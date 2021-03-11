@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Robot : MonoBehaviour
 {
+    [HideInInspector]
     public List<GameObject> switches;
     public GameObject target = null;
     Vector3 targetPos = new Vector3(0,0,0);
@@ -11,15 +13,19 @@ public class Robot : MonoBehaviour
     float distToTarget;
     float closestDist = Mathf.Infinity;
 
-    public GameManager gameManager;
-
-    public float delay; //the robot delay - can be changed from elsewhere
+    GameManager gameManager;
+   
+    [HideInInspector]
+    public float delay; //the robot delay between finding a target and moving to it - can be changed from elsewhere
 
     private void Start() {
+        delay = 8-(SceneManager.GetActiveScene().buildIndex); //lessen delay as levels progress
+        Debug.Log(delay);
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         foreach (Transform child in GameObject.Find("Switches").transform)
             if(child.gameObject.name.Contains("Switch"))
                 switches.Add(child.gameObject); //improve modularity by dynamically finding children, rather than predefining
-        delay = gameManager.delay;
     }
 
     // Update is called once per frame
@@ -86,7 +92,7 @@ public class Robot : MonoBehaviour
     {
         gameManager.GetComponent<GameManager>().coins-=10;
         gameManager.GetComponent<GameManager>().currentFlicked--;
-        Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag); //re use flick function that the player uses
+        Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag, true); //re use flick function that the player uses
         target.GetComponent<Switch>().switchedOn = false;
     }
 

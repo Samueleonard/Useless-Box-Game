@@ -3957,7 +3957,6 @@ MonoBehaviour:
   gManager: {fileID: 1596993487}
   coinBonus: 0
   rayT: {fileID: 0}
-  robot: {fileID: 0}
 --- !u!1 &689791956
 GameObject:
   m_ObjectHideFlags: 0
@@ -10700,6 +10699,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7692692973119434927, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
+      propertyPath: delay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692692973119434927, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1596993487}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
 --- !u!1 &2103043139

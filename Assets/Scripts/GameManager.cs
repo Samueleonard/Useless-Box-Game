@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour
 
     public bool tutorialPassed;
 
-    public float delay;
-
     private void Start() {
         winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;

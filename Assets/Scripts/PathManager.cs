@@ -60,10 +60,6 @@ public class PathManager : MonoBehaviour
 		moveTimeTotal = 0;
 		moveTimeCurrent = 0;
 	}
-	
-	private void Start() {
-		//this.transform.position = 
-	}
 
 	void Update()
 	{

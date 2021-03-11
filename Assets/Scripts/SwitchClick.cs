@@ -10,10 +10,11 @@ public class SwitchClick : MonoBehaviour
 
     public Transform rayT;
 
-    public GameObject robot;
+    private GameObject robot;
 
     private void Start() 
     {
+        robot = GameObject.Find("ComputerRobot");
         coinBonus = gManager.coinBonus;
     }
 
@@ -30,32 +31,35 @@ public class SwitchClick : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     rayT = hit.transform;
-                    CheckTag(rayT.tag);
+                    CheckTag(rayT.tag, false);
                 }
             }
         }   
     }
 
 
-    public void CheckTag(string tag)
+    public void CheckTag(string tag, bool robotFlick) //robotflick - if robot flicks switch,
+                                                      //do not take away coins, only remove coins
+                                                      //on flick if user flicks it, prevent coin
+                                                      //farming by repeatedly flicking switches
     {
         if(tag.Contains("Switch"))
         {
             if(!rayT.gameObject.GetComponent<Switch>().switchedOn) //if switched off, switch on
             {
                 if(tag == "RightSwitch")
-                    FlickForward();
+                    FlickForward(robotFlick);
                 else
-                    FlickBackwards();
+                    FlickBackwards(robotFlick);
                 rayT.gameObject.GetComponent<Switch>().switchedOn = true;
                 gManager.GetComponent<GameManager>().currentFlicked++;
             }
             else  //switched on, switch off
             {    
                 if(tag == "RightSwitch")
-                    FlickBackwards();
+                    FlickBackwards(robotFlick);
                 else
-                    FlickForward();
+                    FlickForward(robotFlick);
                 rayT.gameObject.GetComponent<Switch>().switchedOn = false;
                 gManager.GetComponent<GameManager>().currentFlicked--;
             }    
@@ -66,24 +70,26 @@ public class SwitchClick : MonoBehaviour
         }
     }
 
-    public void FlickForward()
+    public void FlickForward(bool robotFlicked)
     {
         rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
                                                             rayT.gameObject.transform.eulerAngles.y,
                                                             25);
         rayT.gameObject.GetComponent<AudioSource>().Play();
 
-        gManager.coins-=10;
+        if (!robotFlicked)
+            gManager.coins-=10;
     }
 
-    public void FlickBackwards()
+    public void FlickBackwards(bool robotFlicked)
     {
         rayT.gameObject.transform.eulerAngles = new Vector3(rayT.gameObject.transform.eulerAngles.x,
                                                             rayT.gameObject.transform.eulerAngles.y,
                                                             -25);
         rayT.gameObject.GetComponent<AudioSource>().Play();
-        rayT.gameObject.GetComponent<Switch>().switchedOn = true;
-        gManager.coins+=10;
+        
+        if(!robotFlicked)  
+            gManager.coins+=10;
     }
 }
 
