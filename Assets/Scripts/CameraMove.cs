@@ -16,29 +16,33 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {                  
-        Application.targetFrameRate = 60;   
+        Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");   
     }
 
     void FixedUpdate ()
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
-            if(currentTargetHIndex < 1)
+            print("left key, old - " + currentTargetHIndex);
+            if (currentTargetHIndex == 0)
             {
                 currentTargetHIndex = targetsHorizontal.Length-1;
             }
             else{
                 currentTargetHIndex--;
             }
+            print("left key, new - " + currentTargetHIndex);
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
-            if(currentTargetHIndex == targetsHorizontal.Length-1)
+            print("left key, old - " + currentTargetHIndex);
+            if (currentTargetHIndex == targetsHorizontal.Length - 1)
             {
                 currentTargetHIndex = 0;
             }
-            else{
+            else {
                 currentTargetHIndex++;
             }
+            print("right key, new - " + currentTargetHIndex);
         }
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){

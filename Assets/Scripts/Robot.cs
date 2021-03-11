@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Robot : MonoBehaviour
 {
-    public GameObject[] switches;
+    public List<GameObject> switches;
     public GameObject target = null;
     Vector3 targetPos = new Vector3(0,0,0);
     
@@ -16,6 +16,8 @@ public class Robot : MonoBehaviour
     public float delay; //the robot delay - can be changed from elsewhere
 
     private void Start() {
+        foreach (Transform child in GameObject.Find("Switches").transform)
+            switches.Add(child.gameObject); //improve modularity by dynamically finding children, rather than predefining
         delay = gameManager.delay;
     }
 
@@ -40,7 +42,7 @@ public class Robot : MonoBehaviour
         GameObject bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        for (int i = 0; i < switches.Length; i++)
+        for (int i = 0; i < switches.Count; i++)
         {
             if(switches[i].GetComponent<Switch>().switchedOn)
             {

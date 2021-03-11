@@ -10,6 +10,8 @@ public class SwitchClick : MonoBehaviour
 
     public Transform rayT;
 
+    public GameObject robot;
+
     private void Start() 
     {
         coinBonus = gManager.coinBonus;
@@ -57,7 +59,11 @@ public class SwitchClick : MonoBehaviour
                 rayT.gameObject.GetComponent<Switch>().switchedOn = false;
                 gManager.GetComponent<GameManager>().currentFlicked--;
             }    
-        }      
+        }   
+        if(robot.GetComponent<Robot>().target.name == rayT.gameObject.name) //if we click the target switch, make the target null
+        {
+            robot.GetComponent<Robot>().target = null;
+        }
     }
 
     public void FlickForward()
