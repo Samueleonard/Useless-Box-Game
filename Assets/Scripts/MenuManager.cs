@@ -15,7 +15,6 @@ public class MenuManager : MonoBehaviour
 
     private void Start() {
         //close any windows that may be open, perhaps accidentally
-        PlayerPrefs.DeleteAll();
         Debug.Log("Menu Init");
         mainMenuParent.SetActive(true);
         settingsMenuParent.SetActive(false);

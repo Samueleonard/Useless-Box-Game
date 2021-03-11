@@ -55,4 +55,4 @@ movement of bot to switch
 animate robot
 fix any other issues
 --------------------------
-
+saturday - fix change log panel not closing when currently selected button clicked

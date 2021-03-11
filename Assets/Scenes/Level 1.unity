@@ -3414,7 +3414,6 @@ MonoBehaviour:
   gManager: {fileID: 1596993487}
   coinBonus: 0
   rayT: {fileID: 0}
-  robot: {fileID: 0}
 --- !u!1 &689791956
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,7 +7270,6 @@ MonoBehaviour:
   saveManager: {fileID: 300660115}
   time: 0
   tutorialPassed: 0
-  delay: 0
 --- !u!4 &1596993488
 Transform:
   m_ObjectHideFlags: 0
@@ -9834,6 +9832,10 @@ PrefabInstance:
     - target: {fileID: 7692692973119434920, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
       propertyPath: m_Name
       value: ComputerRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692692973119434925, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692692973119434926, guid: 355bfde97c1394e4ba0385ee1fc8d08d, type: 3}
       propertyPath: m_RootOrder
