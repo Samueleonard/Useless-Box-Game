@@ -10,7 +10,7 @@ public class Tutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().index) == 1) //only run the tutorial for the first level
+        if(SceneManager.GetActiveScene().buildIndex == 1) //only run the tutorial for the first level
         {
             Camera.main.GetComponent<SwitchClick>().enabled = false;
             Camera.main.GetComponent<CameraMove>().enabled = false;
