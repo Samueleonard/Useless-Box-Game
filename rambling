@@ -1,8 +1,46 @@
+MENU
+
+PLAY
+    single player/multiplayer
+    single player
+        level select
+        do you want to load (yes/no)
+    multiplayer
+        ????????????
+LOAD
+    list of saves
+    do you want to load (yes/no)
+    loads
+SETTINGS
+    settings tab
+QUIT
+    do you want to quit (yes/no)
+    quit
+---------------------------
+Finish post proc
+finish cam rotate
+4 cams on top, facing each way
+pressing up arrow will take player to top cam, facing same direction as tey were facing
+pressing any key will take player back to side view depending on view they are currently facing
+pressing back arrow whilst in top will take player back to side view they came from
+
+sideView bool? 
+if false, control top view, remember before location and know possible side views to go to
+if true, control side view and wait for up/down arrow
+if down arrow pressed in side view, take view to opposite side
+--------------------------
+each level has a load button
+each level has a unlocked bool
+if unlocked, clicking will load level
+if locked, clicking will do nothing (onscreen box?)
+
+finishing level will unlock next
+--------------------------
 only have 1 level
 when load level pressed, load only scene (save time + storage)
 but parameters for robot would change between levels
 so would have to be pulled from text file (or json?)
-
+----------------------------
 levelX.json 
 read when scene loaded, pass level parameter on scene load? (load level with argument)
 each level has different parameters, making levels harder
@@ -12,36 +50,9 @@ each level has different parameters, making levels harder
 . switch amounts? hide/show switches depending on switch amounts
         each switch has a list of levels that it will appear on
         at start of level, check if level is included in the list, if it is, show switch, else hide
-
-
 ------------------------------------
-
 movement of bot to switch
 animate robot
 fix any other issues
-
 --------------------------
 
-mon     robot move
-
-tue     robot move
-
-wed       robot move
-
-thur      robot move
-
-fri    robot move
-
-sat TEST
-
-sun TEST
-
-mon?
-
-tue?
-
-wed?
-
-thur?
-
-fri?
