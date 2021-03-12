@@ -34,7 +34,7 @@ public class Robot : MonoBehaviour
         if(target == null)
         {
             Debug.Log("no target. finding.");
-            target = GetClosestEnemy();
+            target = GetClosestSwitch();
         }
         else
         {
@@ -44,7 +44,7 @@ public class Robot : MonoBehaviour
 
     }
 
-    private GameObject GetClosestEnemy()
+    private GameObject GetClosestSwitch()
     {
         GameObject bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
@@ -99,13 +99,7 @@ public class Robot : MonoBehaviour
     void Move()
     {
         Debug.Log("moving to target");
-        //GetComponent<PathManager>().NavigateTo(targetPos);
-        /*
-        move smoothly to target (via movement nodes?)
-        animate arm move
-        */
-        //Debug.Log(target.transform.position);
-        //this.transform.position = targetPos;
+        GetComponent<PathManager>().NavigateTo(targetPos);
         Debug.Log("moved to target");
     }
 }

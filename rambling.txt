@@ -56,3 +56,6 @@ animate robot
 fix any other issues
 --------------------------
 saturday - fix change log panel not closing when currently selected button clicked
+saturday/sunday - fix coins + robot not flicking switchs
+sunday - music + music slider in settings
+monday - robot nav
