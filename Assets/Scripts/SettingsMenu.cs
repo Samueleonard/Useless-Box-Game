@@ -9,13 +9,16 @@ public class SettingsMenu : MonoBehaviour
 {
     
     public AudioMixer audioMixer;
+    public AudioSource mmMusic;
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown qualityDropdown;
     public TMP_Dropdown textureDropdown;
     public TMP_Dropdown aaDropdown;
     public TMP_Dropdown fpsLimitDropdown;
-    public Slider volumeSlider;
-    float currentVolume;
+    public Slider mainVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider effectsVolumeSlider;
+    float currentMainVolume, currentMusicVolume, currentEffectsVolume;
     Resolution[] resolutions;
     public Toggle vsyncToggle;
     public Toggle fullscreenToggle;
@@ -67,8 +70,30 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-	    audioMixer.SetFloat("Volume", volume);
-	    currentVolume = volume;
+        /*
+        volume levels are hard to get right, at the upper end, 
+        you want to make big changes to make it quieter/louder 
+        but at the lower ends, you want fine control over volume, 
+        so by using a logarithmic approach to volume control, 
+        you can get fine control over the low end whilst making 
+        the high end adjustable still
+        */
+	    audioMixer.SetFloat("MainVol", Mathf.Log10(volume) * 20);
+        currentMainVolume = volume;
+    }
+
+    
+    public void SetMusicVolume(float volume)
+    {
+        currentMusicVolume = Mathf.Log10(volume) * 10 + 1;
+        mmMusic.volume = currentMusicVolume;
+        Debug.Log(currentMusicVolume);
+    }
+
+    public void SetEffectsVolume(float volume)
+    {
+        //effectVolume.volume = volume;
+        currentEffectsVolume = Mathf.Log10(volume) * 20;
     }
 
     public void SetFullscreen(bool isFullscreen)
@@ -145,8 +170,12 @@ public class SettingsMenu : MonoBehaviour
                 aaDropdown.value);
         PlayerPrefs.SetInt("FullscreenPreference", 
                 Convert.ToInt32(Screen.fullScreen));
-        PlayerPrefs.SetFloat("VolumePreference", 
-                currentVolume); 
+        PlayerPrefs.SetFloat("mainVolumePreference", 
+                currentMainVolume); 
+        PlayerPrefs.SetFloat("musicVolumePreference", 
+                currentMusicVolume); 
+        PlayerPrefs.SetFloat("effectsVolumePreference", 
+                currentEffectsVolume); 
         PlayerPrefs.SetFloat("FPSLimit", 
                 fpsLimitDropdown.value);
         PlayerPrefs.SetString("VSyncToggle",
@@ -181,12 +210,24 @@ public class SettingsMenu : MonoBehaviour
             Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
         else
             Screen.fullScreen = true;
-        if (PlayerPrefs.HasKey("VolumePreference"))
-            volumeSlider.value = 
-                        PlayerPrefs.GetFloat("VolumePreference");
+        if (PlayerPrefs.HasKey("mainVolumePreference"))
+            mainVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("mainVolumePreference");
         else
-            volumeSlider.value = 
-                        PlayerPrefs.GetFloat("VolumePreference");
+            mainVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("mainVolumePreference");
+        if (PlayerPrefs.HasKey("musicVolumePreference"))
+            musicVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("musicVolumePreference");
+        else
+            musicVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("musicVolumePreference");
+        if (PlayerPrefs.HasKey("effectsVolumePreference"))
+            effectsVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("effectsVolumePreference");
+        else
+            effectsVolumeSlider.value = 
+                        PlayerPrefs.GetFloat("effectsVolumePreference");
         if( PlayerPrefs.HasKey("FPSLimit"))
             fpsLimitDropdown.value = 
                         PlayerPrefs.GetInt("FPSLimit");

@@ -95,14 +95,16 @@ public class MenuManager : MonoBehaviour
 
 public AudioMixer mixer;
 
+
 public GameObject[] pages;
-public int currentPage = 0;
+int currentPage = 0;
 
 #region SettingsMenu
 
     public void SetMainVolume(float volume){
         mixer.SetFloat("MainVol", Mathf.Log10(volume) * 20);
     }
+
 
     public void NextPage(){
         pages[currentPage].SetActive(false);
