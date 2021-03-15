@@ -42,6 +42,9 @@ public class MenuManager : MonoBehaviour
         mainMenuParent.SetActive(false);
         settingsMenuParent.SetActive(true);
         pages[0].SetActive(true);
+        pages[1].SetActive(false);
+        pages[2].SetActive(false);
+        pages[3].SetActive(false);
     }
 
     public void OnQuit(){
