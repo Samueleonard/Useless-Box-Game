@@ -9,7 +9,7 @@ public class SaveSystem : MonoBehaviour
     public static int key = 150; //the key to be used for encryption
 
     private void Start() {
-        saveAmount = PlayerPrefs.GetInt("SaveAmount", 0); //HOW MANY SAVES ARE CURRENTLY SAVED   
+        saveAmount = GetSaveAmount();
         /* encryption test - successful
         ProgressData test = new ProgressData();
         test.coins = 0; //set test data
@@ -27,8 +27,7 @@ public class SaveSystem : MonoBehaviour
     {
         ProgressData saveData = new ProgressData();
         saveData.coins = gm.GetComponent<GameManager>().coins;
-        //saveData.level = GetComponent<UnlockManager>().levelPassed;
-        //Debug.Log(saveData.level);
+        saveData.level = GetComponent<UnlockManager>().levelPassed;
         saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
         saveAmount++;
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveAmount + ".data", FileMode.Create);
@@ -55,17 +54,43 @@ public class SaveSystem : MonoBehaviour
         save.saveDate = saveData.saveDate;
         
         return save;
+
     }
 
-    public static string EncryptDecrypt(string data)
-    {   
-        StringBuilder inSb = new StringBuilder(data);
-        StringBuilder outSb = new StringBuilder(data.Length);
+    public string EncryptDecrypt(string data)
+    { 
+        StringBuilder inS = new StringBuilder(data);
+        StringBuilder outS = new StringBuilder(data.Length);
         for (int i = 0; i < data.Length; i++)
         {
-            outSb.Append((char)(inSb[i] ^ key));
+            outS.Append((char)(inS[i] ^ key)); //simple XOR encrypt using predefined key
         }
-        return outSb.ToString();
+        return outS.ToString();
     }   
+
+    public int GetSaveAmount()
+    {
+        int saveAmount = 0;
+        //file names have for ex save1.data
+        try  
+        {    
+            string[] files = Directory.GetFiles(Application.persistentDataPath);
+            //For each string in the save directory directory   
+            for (int i = 0; i < files.Length; i++)  
+            {   
+                //split the string into name and format and then if the format is .data
+                if(Path.GetFileName(files[i].Split('.')[1]) == "data")
+                {
+                    saveAmount++;  
+                }
+            }
+        }  
+        //Catch any  exceptions and log the error message
+        catch (System.Exception e)  
+        {
+            Debug.Log("ERROR - " + e.Message + " \nREPORT TO ME");  
+        }   
+        return saveAmount;
+    }
 }
 

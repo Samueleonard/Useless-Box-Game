@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Load Level Pressed");
         mainMenuParent.SetActive(false);
         loadLevelParent.SetActive(true);
+        GetComponent<ListCreator>().LoadSaveList();
     }
     
     public void OnSettings(){

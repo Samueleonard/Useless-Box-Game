@@ -29,30 +29,38 @@ public class SettingsMenu : MonoBehaviour
     {
         resolutionDropdown.ClearOptions();
         fpsLimitDropdown.ClearOptions();
+        qualityDropdown.ClearOptions();
 
-        List<string> options = new List<string>();
+        List<string> resOptions = new List<string>();
         List<string> fpsOptions = new List<string> {"20", "30", "100"};
-        List<string> qualityOptions = new List<string> {"Very Low", "Low", "Medium", "High", "Very High"};
+        List<string> qualityOptions = new List<string>();
 
         resolutions = Screen.resolutions;
 
         int currentResolutionIndex = 0;
 
+        for( int i = 0; i < QualitySettings.names.Length; i++)
+        {
+            qualityOptions.Add(QualitySettings.names[i]);
+        }
+
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + 
                     resolutions[i].height;
-            options.Add(option);
+            resOptions.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width 
                 && resolutions[i].height == Screen.currentResolution.height)
                 currentResolutionIndex = i;
         }
         
-        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.AddOptions(resOptions);
         fpsLimitDropdown.AddOptions(fpsOptions);
+        qualityDropdown.AddOptions(qualityOptions);
+
         resolutionDropdown.RefreshShownValue();
         fpsLimitDropdown.RefreshShownValue();
-        
+        qualityDropdown.RefreshShownValue();
 
         LoadSettings();
     
@@ -124,38 +132,7 @@ public class SettingsMenu : MonoBehaviour
     
     public void SetQuality(int qualityIndex)
     {
-        if (qualityIndex != 6) // if the user is not using 
-                                //any of the presets
-            QualitySettings.SetQualityLevel(qualityIndex);
-        switch (qualityIndex)
-        {
-            case 0: // quality level - very low
-                textureDropdown.value = 3;
-                aaDropdown.value = 0;
-                break;
-            case 1: // quality level - low
-                textureDropdown.value = 2;
-                aaDropdown.value = 0;
-                break;
-            case 2: // quality level - medium
-                textureDropdown.value = 1;
-                aaDropdown.value = 0;
-                break;
-            case 3: // quality level - high
-                textureDropdown.value = 0;
-                aaDropdown.value = 0;
-                break;
-            case 4: // quality level - very high
-                textureDropdown.value = 0;
-                aaDropdown.value = 1;
-                break;
-            case 5: // quality level - ultra
-                textureDropdown.value = 0;
-                aaDropdown.value = 2;
-                break;
-        }
-            
-        qualityDropdown.value = qualityIndex;
+
     }
     
     public void SaveSettings()

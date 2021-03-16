@@ -26,7 +26,7 @@ public class ListCreator : MonoBehaviour
     int saves = 0;
   
     // Use this for initialization  
-    void Start ()   
+    public void LoadSaveList ()   
     {  
         try  
         {  
@@ -51,14 +51,13 @@ public class ListCreator : MonoBehaviour
                     buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
                 }     
             }
-            if(saves == 0){
+            if(saves == 0)
                 text.text = "No Save Files found in directory. Have you saved any progress?";
-            }
         }  
-        //Catch any of the following exceptions and store the error message at the outputMessage string  
-        catch (System.Exception e)  
+        //Catch any of the following exceptions and store the error message 
+        catch (System.Exception e) 
         {  
             text.text = "ERROR - " + e.Message + " \nREPORT TO ME";  
         }  
-    }  
+    }
 }

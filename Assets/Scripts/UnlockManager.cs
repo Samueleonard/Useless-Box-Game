@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UnlockManager : MonoBehaviour
 {
     public Button level01Button,level02Button,level03Button,level04Button,level05Button;
-    int levelPassed;
+    public int levelPassed;
 
     // Start is called before the first frame update
     void Start()
