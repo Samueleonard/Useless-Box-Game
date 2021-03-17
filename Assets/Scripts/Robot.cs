@@ -20,7 +20,6 @@ public class Robot : MonoBehaviour
 
     private void Start() {
         delay = 8-(SceneManager.GetActiveScene().buildIndex); //lessen delay as levels progress
-        Debug.Log(delay);
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         foreach (Transform child in GameObject.Find("Switches").transform)

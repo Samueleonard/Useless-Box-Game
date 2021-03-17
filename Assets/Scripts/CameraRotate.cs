@@ -15,6 +15,8 @@ public class CameraRotate : MonoBehaviour {
     public float distanceMax = 15f;
  
     Rigidbody rigidBody;
+
+    GameObject verticalP;
  
     float x = 0.0f;
     float y = 0.0f;

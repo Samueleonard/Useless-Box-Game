@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int currentFlicked; //how many switches are currently flicked
     private int winFlicked; //how many need to be flicked to win
     public bool paused = false;
+     //how much time has elapsed since starting level
+    public TMP_Text timeWonText; //how much time level took - showed on level won screen
+
     public Transform helpPanel;
     public Transform pausePanel;
     public Transform quitPanel;
@@ -18,12 +21,11 @@ public class GameManager : MonoBehaviour
     public Transform economyPanel;
     public Transform goToMenuPanel;
 
+    public TMP_Text timeText;
     public TMP_Text levelText;
     public TMP_Text coinText;
-    public TMP_Text timeText; //how much time has elapsed since starting level
-    public TMP_Text timeWonText; //how much time level took - showed on level won screen
 
-    public int coins = 0;
+    public int coins;
     public int coinBonus = 1;
 
     public Button saveButton;
@@ -37,9 +39,13 @@ public class GameManager : MonoBehaviour
     public bool tutorialPassed;
 
     private void Start() {
+        coins = PlayerPrefs.GetInt("Coins");
+        Debug.Log(coins);
         winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
+        Application.targetFrameRate = 100;
+        //Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
     }
     // Update is called once per frame
     void Update()
@@ -49,6 +55,8 @@ public class GameManager : MonoBehaviour
         coinText.text = "Coins : " + coins.ToString();
         economyCoinText.text = "Coins : " + coins.ToString();
         if(currentFlicked == winFlicked && !paused){
+            timeText.text = "";
+            GameObject.Find("ComputerRobot").GetComponent<Robot>().enabled = false;
             coinText.enabled = false;
             pausePanel.gameObject.SetActive(false);
             helpPanel.gameObject.SetActive(false);
@@ -58,6 +66,7 @@ public class GameManager : MonoBehaviour
             levelControl.instance.Win();
             Camera.main.GetComponent<SwitchClick>().enabled = false;
             coins += (10*coinBonus);
+            PlayerPrefs.SetInt("Coins", coins);
             PauseGame();
 
         }
