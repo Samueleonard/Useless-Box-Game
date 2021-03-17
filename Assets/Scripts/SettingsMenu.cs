@@ -67,7 +67,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void SetFPS(){
-        //Application.targetFrameRate = fpsLimitDropdown.value;
+        Application.targetFrameRate = fpsLimitDropdown.value;
     }
 
     public void ToggleVsync(){
@@ -128,11 +128,6 @@ public class SettingsMenu : MonoBehaviour
     {
         QualitySettings.antiAliasing = aaIndex;
         qualityDropdown.value = 6;
-    }
-    
-    public void SetQuality(int qualityIndex)
-    {
-
     }
     
     public void SaveSettings()

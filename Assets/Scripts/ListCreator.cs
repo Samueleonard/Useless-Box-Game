@@ -41,14 +41,14 @@ public class ListCreator : MonoBehaviour
                 if(fileType == "data")
                 {
                     saves++;
-                    //instantiate 
+                    //instantiate button on list
                     GameObject buttonPrefab = Instantiate(savePrefab);
                     buttonPrefab.transform.SetParent(content, false);
                     buttonPrefab.name = saveName;  //remove the .save from the file name
                     buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
                     int saveInt = int.Parse(saveName.Split('e')[1]);
                     PlayerPrefs.SetInt("SaveAmount", saveInt);
-                    buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
+                    // DOES NOT WORK buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
                 }     
             }
             if(saves == 0)
