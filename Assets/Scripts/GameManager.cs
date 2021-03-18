@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
         winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
-        Application.targetFrameRate = 100;
-        //Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
+        Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
     }
     // Update is called once per frame
     void Update()
