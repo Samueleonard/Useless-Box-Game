@@ -64,9 +64,12 @@ public class SwitchClick : MonoBehaviour
                 gManager.GetComponent<GameManager>().currentFlicked--;
             }    
         }   
-        if(robot.GetComponent<Robot>().target.name == rayT.gameObject.name) //if we click the target switch, make the target null
+        if(robot.GetComponent<Robot>().target != null)
         {
-            robot.GetComponent<Robot>().target = null;
+            if(robot.GetComponent<Robot>().target.name == rayT.gameObject.name) //if we click the target switch, make the target null
+            {
+                robot.GetComponent<Robot>().target = null;
+            }
         }
     }
 

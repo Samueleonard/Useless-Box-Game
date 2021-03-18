@@ -87,7 +87,7 @@ public class SaveSystem : MonoBehaviour
         //Catch any  exceptions and log the error message
         catch (System.Exception e)  
         {
-            //Debug.Log("ERROR - " + e.Message);  
+            Debug.Log("ERROR - " + e.Message);  
         }   
         return saveAmount;
     }

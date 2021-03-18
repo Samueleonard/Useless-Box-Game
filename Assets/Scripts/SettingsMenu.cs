@@ -67,7 +67,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void SetFPS(){
-        //Application.targetFrameRate = fpsLimitDropdown.value;
+        Application.targetFrameRate = fpsLimitDropdown.value;
     }
 
     public void ToggleVsync(){
@@ -100,7 +100,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetEffectsVolume(float volume)
     {
-        //effectVolume.volume = volume;
+        //effectsVolumeSlider.value = volume;
         currentEffectsVolume = Mathf.Log10(volume) + 1;
     }
 
@@ -147,7 +147,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolumePreference", 
                 currentMusicVolume); 
         PlayerPrefs.SetFloat("effectsVolumePreference", 
-                currentEffectsVolume); 
+                effectsVolumeSlider.value); 
         PlayerPrefs.SetFloat("FPSLimit", 
                 fpsLimitDropdown.value);
         PlayerPrefs.SetString("VSyncToggle",

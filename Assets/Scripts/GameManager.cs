@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         coins = PlayerPrefs.GetInt("Coins");
-        Debug.Log(coins);
         winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
         levelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
@@ -60,6 +59,7 @@ public class GameManager : MonoBehaviour
             pausePanel.gameObject.SetActive(false);
             helpPanel.gameObject.SetActive(false);
             levelWonPanel.gameObject.SetActive(true);
+            timeText.enabled = false;
             timeWonText.text = "Completed in " + Mathf.Round(time) + " Seconds";
             economyPanel.gameObject.SetActive(false);
             levelControl.instance.Win();
@@ -69,15 +69,17 @@ public class GameManager : MonoBehaviour
             PauseGame();
 
         }
-        if(Input.GetKeyDown(KeyCode.I) && !paused && economyPanel.gameObject.activeSelf == false)
+        if(Input.GetKeyDown(KeyCode.I)  && !pausePanel.gameObject.activeSelf && !economyPanel.gameObject.activeSelf)
             toggleHelpMenu();
-        if(Input.GetKeyDown(KeyCode.Escape) && helpPanel.gameObject.activeSelf == false)
+        if(Input.GetKeyDown(KeyCode.Escape))
             togglePauseMenu();
-        if(Input.GetKeyDown(KeyCode.E) && !paused && helpPanel.gameObject.activeSelf == false)
+        if(Input.GetKeyDown(KeyCode.E)) //&& !pausePanel.gameObject.activeSelf && !helpPanel.gameObject.activeSelf)
             toggleEconomyMenu();
         
         if(paused)
             PauseGame();
+        else
+            ResumeGame();
 
         if(coins < 0)
             coins = 0;
@@ -109,18 +111,19 @@ public class GameManager : MonoBehaviour
 
     void togglePauseMenu(){
         paused = !paused;
+        economyPanel.gameObject.SetActive(false);
+        helpPanel.gameObject.SetActive(false);
         pausePanel.gameObject.SetActive(!pausePanel.gameObject.activeSelf);
     }
 
     void toggleEconomyMenu(){
+        paused = !paused;
         coinText.enabled = !coinText.isActiveAndEnabled;
-        Time.timeScale = 0;
         Camera.main.GetComponent<SwitchClick>().enabled = !Camera.main.GetComponent<SwitchClick>().isActiveAndEnabled;
         economyPanel.gameObject.SetActive(!economyPanel.gameObject.activeSelf);
     }
 
     public void showQuit(){
-        Debug.Log("show quit");
         pausePanel.gameObject.SetActive(false);
         levelWonPanel.gameObject.SetActive(false);
         quitPanel.gameObject.SetActive(true);

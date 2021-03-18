@@ -66,6 +66,8 @@ public class Robot : MonoBehaviour
         return bestTarget;
     }
 
+    bool canFlick;
+
     IEnumerator ChangeTarget() //TODO: terrible name - should probably rename it
     {
         /*
@@ -78,17 +80,22 @@ public class Robot : MonoBehaviour
         */
         if(target.GetComponent<Switch>().switchedOn) //double check if switch is still on, could be switched off by user
         {
-            yield return new WaitForSeconds(delay/2);
-            Move();
-            yield return new WaitForSeconds(delay/2);
-            Flick();
-            target = null;
+            yield return new WaitForSeconds(delay);
+            canFlick = true;
+            if(canFlick)
+            {
+                Move();
+                Flick();
+                target = null;
+            }
+            canFlick = false;
             yield return null; //breakout of function
         }
     }
 
     void Flick()
     {
+        Debug.Log("a");
         gameManager.GetComponent<GameManager>().coins-=10;
         gameManager.GetComponent<GameManager>().currentFlicked--;
         Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag, true); //re use flick function that the player uses
@@ -99,7 +106,27 @@ public class Robot : MonoBehaviour
     {
         Debug.Log("moving to target");
         GetComponent<PathManager>().NavigateTo(targetPos);
+        transform.position = GetClosestNodePos().position;
         Debug.Log("moved to target");
     }
+
+    Transform GetClosestNodePos()
+    {
+        GameObject[] nodes = GameObject.FindGameObjectsWithTag("Waypoint");
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (GameObject t in nodes)
+        {
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t.transform;
+                minDist = dist;
+            }
+        }
+        return tMin;
+    }
+
 }
 
