@@ -15,7 +15,7 @@ public class Tutorial : MonoBehaviour
             Camera.main.GetComponent<SwitchClick>().enabled = false;
             Camera.main.GetComponent<CameraMove>().enabled = false;
             this.gameObject.SetActive(true);
-            Time.timeScale = 0;
+            GameObject.Find("GameManager").GetComponent<GameManager>().paused = true;
         }
         else
             EndTutorial();
@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour
     {
         Camera.main.GetComponent<SwitchClick>().enabled = true;
         Camera.main.GetComponent<CameraMove>().enabled = true;
-        Time.timeScale = 1;
+        GameObject.Find("GameManager").GetComponent<GameManager>().paused = false;
         bool tutorialPassed = true;
         this.gameObject.SetActive(false);
     }

@@ -32,7 +32,7 @@ public class SettingsMenu : MonoBehaviour
         qualityDropdown.ClearOptions();
 
         List<string> resOptions = new List<string>();
-        List<string> fpsOptions = new List<string> {"20", "30", "100"};
+        List<string> fpsOptions = new List<string> {"0", "20", "30", "40", "50", "60"};
         List<string> qualityOptions = new List<string>();
 
         resolutions = Screen.resolutions;
@@ -67,7 +67,9 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void SetFPS(){
-        Application.targetFrameRate = fpsLimitDropdown.value;
+        Application.targetFrameRate = fpsLimitDropdown.value * 20; //value is the index?
+                                                                   //so multiply by 20 to get
+                                                                   //proper value
     }
 
     public void ToggleVsync(){

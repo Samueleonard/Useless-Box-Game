@@ -59,3 +59,8 @@ saturday - fix change log panel not closing when currently selected button click
 saturday/sunday - fix coins + robot not flicking switchs
 sunday - music + music slider in settings
 monday - robot nav
+
+
+
+on screen messages when loading/saving
+change log adder? - fields to add version/changes
