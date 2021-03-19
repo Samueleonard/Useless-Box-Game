@@ -32,7 +32,7 @@ public class SettingsMenu : MonoBehaviour
         qualityDropdown.ClearOptions();
 
         List<string> resOptions = new List<string>();
-        List<string> fpsOptions = new List<string> {"0", "20", "30", "40", "50", "60"};
+        List<string> fpsOptions = new List<string> {"0", "20", "40", "60"};
         List<string> qualityOptions = new List<string>();
 
         resolutions = Screen.resolutions;
@@ -207,9 +207,9 @@ public class SettingsMenu : MonoBehaviour
 
         if( PlayerPrefs.HasKey("FPSLimit"))
             fpsLimitDropdown.value = 
-                        PlayerPrefs.GetInt("FPSLimit");
+                        PlayerPrefs.GetInt("FPSLimit") * 20;
         else
-            fpsLimitDropdown.value = 100;
+            fpsLimitDropdown.value = 0;
 
         if(PlayerPrefs.HasKey("VSyncToggle"))
             vsyncToggle.isOn =
