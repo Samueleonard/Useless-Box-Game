@@ -10,6 +10,7 @@ public class SaveSystem : MonoBehaviour
 
     private void Start() {
         saveAmount = GetSaveAmount();
+        
         /* encryption test - successful
         ProgressData test = new ProgressData();
         test.coins = 0; //set test data
@@ -23,7 +24,7 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveGame()
     {
-        //ProgressData saveData = new ProgressData();
+        ProgressData saveData = new ProgressData();
         //saveData.coins = gm.GetComponent<GameManager>().coins;
         //saveData.level = GetComponent<UnlockManager>().levelPassed;
         //saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
@@ -31,14 +32,13 @@ public class SaveSystem : MonoBehaviour
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveAmount + ".data", FileMode.Create);
 
         BinaryFormatter converter = new BinaryFormatter();
-        //converter.Serialize(dataStream, saveData);
+        converter.Serialize(dataStream, saveData);
 
         dataStream.Close();
     }
 
     public void LoadGame(int saveNumber) //load encrypted file, decrypt it and convert to progress data
     {
-        /*
         Debug.Log("loading save " + saveNumber);
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveNumber + ".data", FileMode.Open);
 
@@ -48,7 +48,7 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
 
         ProgressData save = new ProgressData();
-
+        /*
         save.coins = saveData.coins;
         save.level = saveData.level;
         save.saveDate = saveData.saveDate;
@@ -70,7 +70,7 @@ public class SaveSystem : MonoBehaviour
     public int GetSaveAmount()
     {
         int saveAmount = 0;
-        //file names have for ex save1.data
+        //file names are, for example, save1.data
         try  
         {    
             string[] files = Directory.GetFiles(Application.persistentDataPath);
@@ -84,7 +84,7 @@ public class SaveSystem : MonoBehaviour
                 }
             }
         }  
-        //Catch any  exceptions and log the error message
+        //Catch any exceptions and log the error message
         catch (System.Exception e)  
         {
             Debug.Log("ERROR - " + e.Message);  
