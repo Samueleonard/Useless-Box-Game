@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//UNUSED SCRIPT, JUST FOR INITIAL DIJKSTRA IMPLEMENTATION
+
 public class ShortestPath : MonoBehaviour
 {
-
-/*
     public GameObject[] switches;
 
     public List<Transform> FindShortestPath(Transform start, Transform end)
@@ -90,5 +90,4 @@ public class ShortestPath : MonoBehaviour
 
         return end;
     }
-*/
 }

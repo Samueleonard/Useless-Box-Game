@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+handles the moveable robot
+including tracking targets, moving and finding new targets
+variable are accessed from economy also, to apply boosts
+*/
 public class Robot : MonoBehaviour
 {
     [HideInInspector]
@@ -43,6 +48,7 @@ public class Robot : MonoBehaviour
 
     }
 
+    //return the closest switch
     private GameObject GetClosestSwitch()
     {
         GameObject bestTarget = null;
@@ -68,6 +74,7 @@ public class Robot : MonoBehaviour
 
     bool canFlick;
 
+    //move, flick target and find a new target
     IEnumerator ChangeTarget() //TODO: terrible name - should probably rename it
     {
         /*
@@ -101,6 +108,7 @@ public class Robot : MonoBehaviour
         target.GetComponent<Switch>().switchedOn = false;
     }
 
+    //move to the node
     void Move()
     {
         //Debug.Log("moving to target");
@@ -109,12 +117,16 @@ public class Robot : MonoBehaviour
         //Debug.Log("moved to target");
     }
 
+    //return the transform component (position, rotation, scale) of the closest node
+    //so that we can move to it
     Transform GetClosestNodePos()
     {
+        //add all nodes to the list
         GameObject[] nodes = GameObject.FindGameObjectsWithTag("Waypoint");
         Transform tMin = null;
-        float minDist = Mathf.Infinity;
+        float minDist = Mathf.Infinity; //initially set closest to infinity
         Vector3 currentPos = transform.position;
+        //loop through each node and find the closest
         foreach (GameObject t in nodes)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
@@ -124,7 +136,7 @@ public class Robot : MonoBehaviour
                 minDist = dist;
             }
         }
-        return tMin;
+        return tMin; //return closest transform
     }
 
 }

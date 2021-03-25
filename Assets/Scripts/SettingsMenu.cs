@@ -5,6 +5,10 @@ using UnityEngine.Audio;
 using TMPro;
 using UnityEngine.UI;
 
+/*
+purely handles the settings menu tab
+including the saving and loading of the settings
+*/
 public class SettingsMenu : MonoBehaviour
 {
     
@@ -132,6 +136,7 @@ public class SettingsMenu : MonoBehaviour
         qualityDropdown.value = 6;
     }
     
+    //take each value and save it to a playerpref
     public void SaveSettings()
     {
         PlayerPrefs.SetInt("QualitySettingPreference", 

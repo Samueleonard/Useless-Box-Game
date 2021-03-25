@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//controls music in the main music
 public class MenuMusic : MonoBehaviour
 {
     public static MenuMusic mmMusic;

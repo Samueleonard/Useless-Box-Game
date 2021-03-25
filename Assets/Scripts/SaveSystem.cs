@@ -3,11 +3,17 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
+/*
+controls the save and loading system
+including en/decryption of save files
+*/
 public class SaveSystem : MonoBehaviour
 {
     int saveAmount;
     public static int key = 150; //the key to be used for encryption
 
+    public GameManager gm;
+    
     private void Start() {
         saveAmount = GetSaveAmount();
         
@@ -25,9 +31,9 @@ public class SaveSystem : MonoBehaviour
     public void SaveGame()
     {
         ProgressData saveData = new ProgressData();
-        //saveData.coins = gm.GetComponent<GameManager>().coins;
-        //saveData.level = GetComponent<UnlockManager>().levelPassed;
-        //saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
+        saveData.coins = gm.GetComponent<GameManager>().coins;
+        saveData.level = GetComponent<UnlockManager>().levelPassed;
+        saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
         saveAmount++;
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveAmount + ".data", FileMode.Create);
 
@@ -37,6 +43,7 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
     }
 
+    //load a save, given a file name
     public void LoadGame(int saveNumber) //load encrypted file, decrypt it and convert to progress data
     {
         //Debug.Log("loading save " + saveNumber);
@@ -48,11 +55,9 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
 
         ProgressData save = new ProgressData();
-        /*
         save.coins = saveData.coins;
         save.level = saveData.level;
         save.saveDate = saveData.saveDate;
-        */
         GetComponent<ListCreator>().text.text = "Save Loaded Successfully!"; 
     }
 
@@ -67,6 +72,7 @@ public class SaveSystem : MonoBehaviour
         return outS.ToString();
     }   
 
+    //returns the current amount of save files in a directory  (users/NAME/appdata/LOCALLOW/samuel leonard)
     public int GetSaveAmount()
     {
         int saveAmount = 0;
