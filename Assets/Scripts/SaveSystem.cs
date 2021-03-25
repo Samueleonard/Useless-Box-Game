@@ -16,9 +16,9 @@ public class SaveSystem : MonoBehaviour
         test.coins = 0; //set test data
         test.level = 0;
         test.saveDate = "abc";
-        Debug.Log(EncryptDecrypt(test.coins.ToString() + "," + test.level + "," + test.saveDate)); //encrypt test date
-        Debug.Log(encrypted);
-        Debug.Log(EncryptDecrypt(encrypted)); //run the same encryption algorithm and get the same result back
+        //Debug.Log(EncryptDecrypt(test.coins.ToString() + "," + test.level + "," + test.saveDate)); //encrypt test date
+        //Debug.Log(encrypted);
+        //Debug.Log(EncryptDecrypt(encrypted)); //run the same encryption algorithm and get the same result back
         */
     }
 
@@ -39,7 +39,7 @@ public class SaveSystem : MonoBehaviour
 
     public void LoadGame(int saveNumber) //load encrypted file, decrypt it and convert to progress data
     {
-        Debug.Log("loading save " + saveNumber);
+        //Debug.Log("loading save " + saveNumber);
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveNumber + ".data", FileMode.Open);
 
         BinaryFormatter converter = new BinaryFormatter();
@@ -87,7 +87,7 @@ public class SaveSystem : MonoBehaviour
         //Catch any exceptions and log the error message
         catch (System.Exception e)  
         {
-            Debug.Log("ERROR - " + e.Message);  
+            //Debug.Log("ERROR - " + e.Message);  
         }   
         return saveAmount;
     }

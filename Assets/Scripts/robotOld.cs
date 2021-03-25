@@ -37,7 +37,7 @@ public class robot : MonoBehaviour
         {
             if(potentialTarget.gameObject.GetComponent<Switch>().switchedOn) //if switched off dont bother doing anything off
             {
-                Debug.Log(potentialTarget.gameObject.name + "is on");
+                //Debug.Log(potentialTarget.gameObject.name + "is on");
                 Vector2 directionToTarget = potentialTarget.gameObject.transform.position - currentPosition;
                 //FIXME robot moves to offset, and high in the air
                 float dSqrToTarget = (potentialTarget.gameObject.transform.position - currentPosition).sqrMagnitude;
@@ -61,7 +61,7 @@ public class robot : MonoBehaviour
             time = time + 1 +  Time.deltaTime; //move same rate for all frame rates
         }
         //Camera.main.GetComponent<SwitchClick>().FlickOff();
-        Debug.Log("Switched Off");
+        //Debug.Log("Switched Off");
     }
     
     //find target

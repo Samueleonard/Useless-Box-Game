@@ -5,19 +5,21 @@ using System.IO;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+dynamically creates lists for the menus
+(changelogs/savegames)
+*/
+
 public class ListCreator : MonoBehaviour
-{
-    ///Variables for listing the directory contents    
-    //A string that holds the directory path  
-    private string directoryPath;   
-    //A List of strings that holds the file names with their respective extensions  
-    private List<string> fileNames;  
-    //A string that stores the full file path  
-    private string fullFilePath;  
-  
-    //The initial position of the scroll view  
-    private Vector2 scrollPosition = Vector2.zero;  
-    ////  
+{   
+    
+    private string directoryPath;   //the directory path  
+    
+    private List<string> fileNames;  //A List of strings with file names and extensions  
+
+    private string fullFilePath; //A string that stores the full file path 
+
+    private Vector2 scrollPosition = Vector2.zero;   // initial position of the scroll view    
   
     public GameObject savePrefab;
     public RectTransform content;
@@ -25,7 +27,6 @@ public class ListCreator : MonoBehaviour
 
     int saves = 0;
   
-    // Use this for initialization  
     public void LoadSaveList ()   
     {  
         try  
@@ -48,7 +49,7 @@ public class ListCreator : MonoBehaviour
                     buttonPrefab.transform.Find("SaveNumberText").GetComponent<TMP_Text>().text = saveName;
                     int saveInt = int.Parse(saveName.Split('e')[1]);
                     PlayerPrefs.SetInt("SaveAmount", saveInt);
-                    // DOES NOT WORK buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
+                    buttonPrefab.GetComponent<Button>().onClick.AddListener(delegate { GetComponent<SaveSystem>().LoadGame(saveInt) ; });                    
                 }     
             }
             if(saves == 0)
@@ -57,7 +58,7 @@ public class ListCreator : MonoBehaviour
         //Catch any of the following exceptions and store the error message 
         catch (System.Exception e) 
         {  
-            text.text = "ERROR - " + e.Message + " \nREPORT TO ME";  
+            text.text = "ERROR - " + e.Message;  
         }  
     }
 }

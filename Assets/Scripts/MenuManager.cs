@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
+/*
+handles the main menu, inc tracking states and pages, 
+hiding and showing as neccsarry
+and handling all button presses, making sure they work as expected
+*/
+
 public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenuParent, amountSelectParent, settingsMenuParent, levelSelectParent,
@@ -15,7 +21,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start() {
         //close any windows that may be open, perhaps accidentally
-        Debug.Log("Menu Init");
+        //Debug.Log("Menu Init");
         mainMenuParent.SetActive(true);
         settingsMenuParent.SetActive(false);
         amountSelectParent.SetActive(false);  
@@ -26,22 +32,22 @@ public class MenuManager : MonoBehaviour
     }
 
     public void OnPlayButton(){
-        Debug.Log("Play pressed");
+        //Debug.Log("Play pressed");
         mainMenuParent.SetActive(false);
         amountSelectParent.SetActive(true);
     }
 
     public void OnLoadLevel(){
-        Debug.Log("Load Level Pressed");
+        //Debug.Log("Load Level Pressed");
         mainMenuParent.SetActive(false);
         loadLevelParent.SetActive(true);
         GetComponent<ListCreator>().LoadSaveList();
     }
     
     public void OnSettings(){
-        Debug.Log("Settings Pressed");
         mainMenuParent.SetActive(false);
         settingsMenuParent.SetActive(true);
+        //hide all pages but the first one, just incase any were open
         pages[0].SetActive(true);
         pages[1].SetActive(false);
         pages[2].SetActive(false);
@@ -49,7 +55,6 @@ public class MenuManager : MonoBehaviour
     }
 
     public void OnQuit(){
-        Debug.Log("Quitting");
         Application.Quit();
     }
 
@@ -64,19 +69,17 @@ public class MenuManager : MonoBehaviour
 #region Player Amount Select
 
     public void OnSinglePlayer(){
-        Debug.Log("Loading SinglePlayer Scene");
         mainMenuParent.SetActive(false);
         amountSelectParent.SetActive(false);
         levelSelectParent.SetActive(true);
     }
 
     public void OnMultiPlayer(){
-        Debug.Log("Loading Multiplayer Scene");
         SceneManager.LoadScene(1);
     }
 
     public void OnBack(){
-        Debug.Log("Going Back To Main Menu");
+        //Debug.Log("Going Back To Main Menu");
         mainMenuParent.SetActive(true);
         amountSelectParent.SetActive(false);   
         settingsMenuParent.SetActive(false); 
@@ -113,27 +116,27 @@ int currentPage = 0;
     public void NextPage(){
         pages[currentPage].SetActive(false);
         if(currentPage == pages.Length-1){ //we are on last page, go to first page
-            Debug.Log("currently on last page");
+            //Debug.Log("currently on last page");
             pages[0].SetActive(true);
             currentPage = 0;
         }
         else{
-            Debug.Log("currently on page " + (currentPage+1) + " moving forward to page " + (currentPage+2));
+            //Debug.Log("currently on page " + (currentPage+1) + " moving forward to page " + (currentPage+2));
             pages[currentPage+1].SetActive(true);
             currentPage++;
         }
-        Debug.Log("Going to next page");
+        //Debug.Log("Going to next page");
     }
 
     public void PreviousPage(){
         pages[currentPage].SetActive(false);
         if(currentPage == 0){ //we are on last page, go to first page
-            Debug.Log("currently on first page");
+            //Debug.Log("currently on first page");
             currentPage = pages.Length-1;
             pages[pages.Length-1].SetActive(true);
         }
         else{
-            Debug.Log("currently on page " + (currentPage-1) + " moving back to page " + (currentPage-2));
+            //Debug.Log("currently on page " + (currentPage-1) + " moving back to page " + (currentPage-2));
             pages[currentPage-1].SetActive(true);
             currentPage--;
         }

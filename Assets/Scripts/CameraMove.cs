@@ -36,7 +36,7 @@ public class CameraMove : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("going up");
+            //Debug.Log("going up");
             inT = targetsHorizontal[currentTargetHIndex].transform.position;
             vertical = true;
             Vector3 targetCamPos = targetV.transform.position;
@@ -46,7 +46,7 @@ public class CameraMove : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("going down");
+            //Debug.Log("going down");
             vertical = false;
             Vector3 targetCamPos = inT;
             transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);

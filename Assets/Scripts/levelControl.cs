@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+
+*/
 public class levelControl : MonoBehaviour
 {
 
@@ -10,7 +13,7 @@ public class levelControl : MonoBehaviour
     [HideInInspector]
     public int sceneIndex, levelPassed;
 
-    // Start is called before the first frame update
+    // prevent 'double loading' bug and initialise levelcontrol management
     void Start()
     {
         if(instance == null)
@@ -22,7 +25,7 @@ public class levelControl : MonoBehaviour
             levelPassed = PlayerPrefs.GetInt("LevelPassed");
     }
 
-    // Update is called once per frame
+    // if we complete the final level, send us to the menu, if not, load next level
     public void Win()
     {
         if(sceneIndex == 5)

@@ -5,9 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+/*
+the 'main' script
+handles the games state, including tracking coins, 
+switches flicked, and handling all of the menus.
+
+*/
 
 public class GameManager : MonoBehaviour
 {
+    #region variables
+
     public int currentFlicked; //how many switches are currently flicked
     private int winFlicked; //how many need to be flicked to win
     public bool paused = false;
@@ -37,7 +45,8 @@ public class GameManager : MonoBehaviour
     public float time = 0;
 
     public bool tutorialPassed;
-
+#endregion
+    
     private void Start() {
         coins = PlayerPrefs.GetInt("Coins");
         winFlicked = (GameObject.Find("Switches").transform.childCount / 2); //half because of the green/red child with every switch
@@ -45,6 +54,7 @@ public class GameManager : MonoBehaviour
         saveButton.GetComponent<Button>().onClick.AddListener(delegate { saveManager.GetComponent<SaveSystem>().SaveGame(); });
         Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -69,11 +79,13 @@ public class GameManager : MonoBehaviour
             PauseGame();
 
         }
+
+        //pressing certain keys will open menus/panels
         if(Input.GetKeyDown(KeyCode.I)  && !pausePanel.gameObject.activeSelf && !economyPanel.gameObject.activeSelf)
             toggleHelpMenu();
         if(Input.GetKeyDown(KeyCode.Escape))
             togglePauseMenu();
-        if(Input.GetKeyDown(KeyCode.E)) //&& !pausePanel.gameObject.activeSelf && !helpPanel.gameObject.activeSelf)
+        if(Input.GetKeyDown(KeyCode.E) && !pausePanel.gameObject.activeSelf && !helpPanel.gameObject.activeSelf)
             toggleEconomyMenu();
         
         if(paused)
@@ -81,6 +93,7 @@ public class GameManager : MonoBehaviour
         else
             ResumeGame();
 
+        //prevent coins + flicked from going below zero, just incase
         if(coins < 0)
             coins = 0;
         

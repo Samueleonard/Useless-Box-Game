@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+a single entry to the changelog list in the main menu
+can be instanstiated to create new entries, with the field entries
+entered through a ui entry box, and then saved in the changelog list.
+*/
 public class ChangeLogEntry : MonoBehaviour
 {
     public string version;

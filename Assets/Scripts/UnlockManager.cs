@@ -18,7 +18,7 @@ public class UnlockManager : MonoBehaviour
         TODO: fix if time, below works 
         for(int i = 1; i <= levelPassed; i++){
             GameObject current = GameObject.Find("LevelSelect (" + i + ")");
-            Debug.Log(current.name);
+            //Debug.Log(current.name);
         }
         */
         level02Button.interactable = false;

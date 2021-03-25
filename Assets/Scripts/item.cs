@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+class template for store items
+*/
 public class item : MonoBehaviour
 {
     public string productName;
@@ -13,7 +16,7 @@ public class item : MonoBehaviour
 
     public GameObject gm;
 
-    // Start is called before the first frame update
+    // add details to the buttons, and add the function on click 
     void Start()
     {
         itemText.text = productName + " - " + price + " coins" + "(" + duration + " secs)";

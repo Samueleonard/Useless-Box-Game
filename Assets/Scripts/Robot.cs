@@ -32,12 +32,12 @@ public class Robot : MonoBehaviour
     {
         if(target == null)
         {
-            Debug.Log("no target. finding.");
+            //Debug.Log("no target. finding.");
             target = GetClosestSwitch();
         }
         else
         {
-            Debug.Log("target found. flicking.");
+            //Debug.Log("target found. flicking.");
             StartCoroutine(ChangeTarget());
         }
 
@@ -58,7 +58,7 @@ public class Robot : MonoBehaviour
                 {
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = switches[i];
-                    Debug.Log("new target - " + bestTarget.name);
+                    //Debug.Log("new target - " + bestTarget.name);
                 }
             }
         }
@@ -95,7 +95,6 @@ public class Robot : MonoBehaviour
 
     void Flick()
     {
-        Debug.Log("a");
         gameManager.GetComponent<GameManager>().coins-=10;
         gameManager.GetComponent<GameManager>().currentFlicked--;
         Camera.main.GetComponent<SwitchClick>().CheckTag(target.tag, true); //re use flick function that the player uses
@@ -104,10 +103,10 @@ public class Robot : MonoBehaviour
 
     void Move()
     {
-        Debug.Log("moving to target");
+        //Debug.Log("moving to target");
         GetComponent<PathManager>().NavigateTo(targetPos);
         transform.position = GetClosestNodePos().position;
-        Debug.Log("moved to target");
+        //Debug.Log("moved to target");
     }
 
     Transform GetClosestNodePos()

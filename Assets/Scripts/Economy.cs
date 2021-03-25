@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+handles the economy side of the game, including tracking current powerups,
+the panel itself, and applying boosts
+*/
 public class Economy : MonoBehaviour
 {
 
@@ -25,11 +29,13 @@ public class Economy : MonoBehaviour
             if(purchased == "Robot Slow")
                 StartCoroutine(RobotSlow(duration));
         }
-        else if(activePwrup)
+        else if(activePwrup)  //if we already have a powerup
             statusText.text = "Powerup Active Already. Try Again Soon.";
-        else
+        else //no active powerups but we dont have enough coins
             statusText.text = "Not enough coins.";
     }
+
+    //all powerups are ienumators so that we can apply a delay (duration)
 
     public IEnumerator CoinBoost(float wait)
     {
