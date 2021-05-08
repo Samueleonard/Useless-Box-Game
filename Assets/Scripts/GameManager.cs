@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         pausePanel.gameObject.SetActive(false);
         economyPanel.gameObject.SetActive(false);
         Camera.main.GetComponent<SwitchClick>().enabled = true;
+        goToMenuPanel.gameObject.SetActive(false);
     }
 
     void toggleHelpMenu(){

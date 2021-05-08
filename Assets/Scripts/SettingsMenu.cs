@@ -156,7 +156,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("effectsVolumePreference", 
                 effectsVolumeSlider.value); 
         PlayerPrefs.SetFloat("FPSLimit", 
-                fpsLimitDropdown.value);
+                fpsLimitDropdown.value * 20);
         PlayerPrefs.SetString("VSyncToggle",
                 vsyncToggle.isOn.ToString());
     }

@@ -30,15 +30,17 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveGame()
     {
-        ProgressData saveData = new ProgressData();
+        //ProgressData saveData = new ProgressData();
+        /*
         saveData.coins = gm.GetComponent<GameManager>().coins;
         saveData.level = GetComponent<UnlockManager>().levelPassed;
         saveData.saveDate = System.DateTime.Now.ToString("dd/MM/yyyy");
+        */
         saveAmount++;
         FileStream dataStream = new FileStream(Application.persistentDataPath + "/save" + saveAmount + ".data", FileMode.Create);
 
         BinaryFormatter converter = new BinaryFormatter();
-        converter.Serialize(dataStream, saveData);
+        //converter.Serialize(dataStream, saveData);
 
         dataStream.Close();
     }
@@ -55,9 +57,11 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
 
         ProgressData save = new ProgressData();
+        /*
         save.coins = saveData.coins;
         save.level = saveData.level;
         save.saveDate = saveData.saveDate;
+        */
         GetComponent<ListCreator>().text.text = "Save Loaded Successfully!"; 
     }
 
